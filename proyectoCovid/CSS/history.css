@@ -1,0 +1,52 @@
+.delet{
+
+    cursor: pointer;
+}
+
+.title{
+    font-size: 25px;
+}
+
+.title2{
+    font-size: 20px;
+}
+
+.bt{
+    color: white;
+}
+
+.bt:hover{
+    color: black;
+}
+
+.image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    background-size: cover;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCXYTQQHicA3JEJOXrpkrDWtlVa-4Kp-xcsg&usqp=CAU");
+}
+
+.circle{
+        padding: 28px 30% 9px 30%;
+        text-align: center;
+}
+
+.name{
+    font-size: 20px;
+}
+
+.contP{
+    /*background: #ee0979;  
+    background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);  
+    background: linear-gradient(to right, #ff6a00, #ee0979); 
+    background-repeat: no-repeat;
+    background-position:center;*/
+    background-size: cover;
+    background-color: rgba(0, 183, 255, 0.075);
+}
+
+.thead-dark{
+    width: 100%;
+}

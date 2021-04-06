@@ -9,45 +9,60 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/home.css">
-    <link rel="stylesheet" href="../JS/home.js">
 </head>
 <body>
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="container">
-<!-- Comentario en la línea 17 -->
-            <form class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5">
+            <form id="pregunta-inicial" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5">
+                <label for="p-i">Seleccione una opción</label>
+                <select name="p-i" id="p-i">
+                    <option value="0">Seleccione una</option>
+                    <option value="1">Tengo COVID-19</option>
+                    <option value="2">NO tengo COVID-19</option>
+                </select>
+            </form>
+
+            <form id="covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
  
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
+                        <span>Edad</span>
                         <input type="text" class="form-control">
                     </div>  
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
+                        <span>Sexo</span>
                         <input type="text" class="form-control">
                     </div>        
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
+                        <span>Peso</span>
                         <input type="text" class="form-control">
                     </div>  
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
-                        <input type="text" class="form-control">
+                        <span>Enfermedades base</span>
+                        <select class="custom-select" multiple>
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
                     </div>        
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
-                        <input type="text" class="form-control">
+                        <span>Síntomas</span>
+                        <span>Aquí se pondrán las enfermedades base</span>
                     </div>  
                     <div class="col-md-6">
-                        <span>Datos iniciales 2</span>
-                        <input type="text" class="form-control">
+                        <span>Ingreso en algún centro médico</span>
+                        <select name="ingreso" id="ingreso">
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
                     </div>        
                 </div>
 
@@ -58,8 +73,8 @@
                     </div>
                 </div>
                 
-                <div class="form-grafic form-group mt-5">
-                     <span>Graficos</span> 
+                <div class="form-grafic form-group mt-5" style="display: none;">
+                     <span>Gráficos</span> 
                      <div class="form-control grafic">
                      </div>
                 </div>
@@ -67,4 +82,6 @@
 
         </div>
     </main>
+
+    <script src="../JS/home.js"></script>
 </body>
