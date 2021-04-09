@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Template</title>
+    <title>Simulador COVID</title>
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/home.css">
+    
 </head>
 
 <body>
@@ -24,24 +25,125 @@
                 </select>
             </form>
 
+            <form id="no-covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
+                <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Nombre</span>
+                        <input id="nombre-n" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Identidad</span>
+                        <input id="identidad-n" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Edad</span>
+                        <input id="edad-n" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Sexo</span>
+                        <select name="sexo-n" id="sexo" class="form-control">
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Síntomas</span>
+                        <select class="form-control" name="s-sintomas-n" id="s-sintomas-n">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span>Enfermedades base</span>
+                        <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Frecuencia del lavado de manos</span>
+                        <select class="form-control" name="lavado-manos" id="lavado-manos">
+                            <option value="1">Nunca</option>
+                            <option value="2">Poco</option>
+                            <option value="3">Frecuentemente</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span>Uso de mascarilla</span>
+                        <select class="form-control" name="uso-mascarilla" id="uso-mascarilla">
+                            <option value="1">Nunca</option>
+                            <option value="2">Poco</option>
+                            <option value="3">Frecuentemente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Práctica del confinamiento</span>
+                        <select class="form-control" name="confinamiento" id="confinamiento">
+                            <option value="1">Poco</option>
+                            <option value="2">Medio</option>
+                            <option value="3">Mucho</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group mt-5">
+                    <div class="btn-group p1 bg-black" role="group">
+                        <button id="regresar-no-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
+                        <button id="simular-covid" type="button" class="btn btn-outline-info">Simular</button>
+                    </div>
+                </div>
+
+            </form>
+
             <form id="covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
 
                 <div class="form-group row">
                     <div class="col-md-6">
+                        <span>Nombre</span>
+                        <input id="nombre" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Identidad</span>
+                        <input id="identidad" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
                         <span>Edad</span>
-                        <input type="text" class="form-control">
+                        <input id="edad" type="text" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <span>Sexo</span>
-                        <input type="text" class="form-control">
+                        <select name="sexo" id="sexo" class="form-control">
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-6">
                         <span>Peso</span>
-                        <input type="text" class="form-control">
+                        <input id="peso" type="text" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <span>Enfermedades base</span>
@@ -73,10 +175,22 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Días con síntomas</span>
+                        <select class="form-control" name="dias-con-sintomas" id="dias-con-sintomas">
+                            <option value="1">1-3</option>
+                            <option value="2">4-10</option>
+                            <option value="3">11-18</option>
+                            <option value="4">19+</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
-                        <button type="button" class="btn btn-outline-danger">Regresar</button>
-                        <button type="button" class="btn btn-outline-info">Simular</button>
+                        <button id="regresar-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
+                        <button id="simular-covid" type="button" class="btn btn-outline-info">Simular</button>
                     </div>
                 </div>
 
@@ -95,7 +209,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Enfermedaes crónicas</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="restablecerValorEB()">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="comprobarArregloEnfermedadesBase()">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -128,7 +242,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Síntomas</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reestablecerValorS()">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="comprobarArregloSintomas()">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -184,6 +298,9 @@
             </div>
           </div>
         <!-- FIN MODAL SÍNTOMAS -->
+
+
+
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

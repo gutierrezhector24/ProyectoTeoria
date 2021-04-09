@@ -4,6 +4,88 @@ var selectSintomas = document.getElementById("s-sintomas");
 selectPrincipal.value = 0;
 var enfermedadesBase = [];
 var sintomas = [];
+var jsonValoresCOVID = {
+    enfermedadesBase: {
+        hipertension: {
+            valorPeligro: 0
+        },
+        diabetes: {
+            valorPeligro: 0
+        },
+        cancer: {
+            valorPeligro: 0
+        }
+    },
+    sintomas: {
+        congestionNasal: {
+            valorPeligro: 0
+        },
+        malestarGarganta: {
+            valorPeligro: 0
+        },
+        dolorCorporal: {
+            valorPeligro: 0
+        },
+        dolorOjos: {
+            valorPeligro: 0
+        },
+        dolorCabeza: {
+            valorPeligro: 0
+        },
+        vomito: {
+            valorPeligro: 0
+        },
+        diarrea: {
+            valorPeligro: 0
+        },
+        decaimiento: {
+            valorPeligro: 0
+        },
+        fiebre: {
+            valorPeligro: 0
+        },
+        perdidaGustoOlfato: {
+            valorPeligro: 0
+        },
+        opresionPecho: {
+            valorPeligro: 0
+        },
+        cansancio: {
+            valorPeligro: 0
+        }
+    },
+    edad: {
+        ceroDiecisiete: {
+            valorPeligro: 0
+        },
+        dieciochoTreinticinco: {
+            valorPeligro: 0
+        },
+        treintiseisCincuenta: {
+            valorPeligro: 0
+        },
+        cincuentayunoMas: {
+            valorPeligro: 0
+        }
+    },
+    peso: {
+
+    },
+    diasConSintomas: {
+        unoTres: {
+            valorPeligro: 0
+        },
+        cuatroDiez: {
+            valorPeligro: 0
+        },
+        onceDieciocho: {
+            valorPeligro: 0
+        },
+        diecinueveMas: {
+            valorPeligro: 0
+        }
+    }
+}
 
 selectPrincipal.addEventListener('change', actualizar);
 selectEnfermedades.addEventListener('change', analizarOpcion);
@@ -61,6 +143,11 @@ function mostrarAdvertencia(){
 var mostrarCovid = function(){
     ocultarPrincipal();
     document.getElementById("covid").style.display = 'block';
+}
+
+var mostrarNoCovid = function(){
+    ocultarPrincipal();
+    document.getElementById("no-covid").style.display = 'block';
 }
 
 function ocultarPrincipal(){
@@ -160,7 +247,6 @@ function guardarEnfermedadesBase(){
 }
 
 
-
 function guardarSintomas(){
     limpiarArregloSintomas();
     $("#sintomas input[type=checkbox]:checked").each(function () {
@@ -193,4 +279,28 @@ function limpiarArregloSintomas(){
     sintomas = [];
 }
 
+document.getElementById("regresar-covid").addEventListener("click", regresarCovid);
+document.getElementById("regresar-no-covid").addEventListener("click", regresarNoCovid);
+
+function regresarCovid(){
+    ocultarCovid();
+    mostrarPrincipal();
+}
+
+function regresarNoCovid(){
+    ocultarNoCovid();
+    mostrarPrincipal();
+}
+
+function ocultarCovid(){
+    document.getElementById("covid").style.display = 'none';
+}
+
+function ocultarNoCovid(){
+    document.getElementById("no-covid").style.display = 'none';
+}
+
+function mostrarPrincipal(){
+    location.reload();
+}
 // input[type=checkbox]:checked
