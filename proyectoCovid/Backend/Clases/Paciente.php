@@ -263,9 +263,10 @@ header("Content-Type: application/json");
 
         public static function getUnPaciente($identidad){
                 $pacientes = json_decode(self::getPaciente(), true);
+                $paciente = null;
 
                 for($cPacientes = 0; $cPacientes < sizeof($pacientes); $cPacientes++){
-                        if($identidad == $pacientes[$cPacientes]['user']){
+                        if($identidad == $pacientes[$cPacientes]['identidad']){
                             $paciente = $pacientes[$cPacientes];
                         break;
                         }

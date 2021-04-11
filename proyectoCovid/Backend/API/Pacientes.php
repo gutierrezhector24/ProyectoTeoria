@@ -24,6 +24,9 @@
             }
 
             echo json_encode($resultado);
-            break;
+        break;
+        case 'GET':
+            Paciente::getUnPaciente($_POST['id']);
+        break;
     }
 ?>
