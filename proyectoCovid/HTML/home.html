@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     
 </head>
 
 <body>
-
-    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <main class="contP d-flex align-items-center min-vh-100 py-3 py-md-0">
+        <div class="contP"></div>
         <div class="container">
             <form id="pregunta-inicial" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5">
                 <div class="form-group">
@@ -114,7 +115,7 @@
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
                         <button id="regresar-no-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-covid" type="button" class="btn btn-outline-info">Simular</button>
+                        <button id="simular-no-covid" type="button" class="btn btn-outline-info" onclick="simularNoCovid()">Simular</button>
                     </div>
                 </div>
 
@@ -200,7 +201,7 @@
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
                         <button id="regresar-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-covid" type="button" class="btn btn-outline-info">Simular</button>
+                        <button id="simular-covid" type="button" class="btn btn-outline-info" onclick="simularCovid()">Simular</button>
                     </div>
                 </div>
 
@@ -211,7 +212,58 @@
                 </div>
             </form>
 
+
+            <!--Inicio canvas 1-->
+            <div id="secundario-noCovid" class="card" style="display:none;">
+    
+                <div class="card-header">
+                    <span class="title mt-2 mb-2"></span>
+                    <div class="btn-group float-right" role="group">
+                        <button id="regresar-secundario-noCovid" type="button" class="btn btn-warning mt-2 mb-2" style="color:white;"
+                            onclick="regresarSecundarioNoCovid()">Regresar</button>
+                    </div>
+                </div>
+    
+                <div class="card-body col-sm-12 row">    
+                    <select name="nn" id="nn">
+                        <option value="1">De barras</option>
+                        <option value="2">Circular</option>
+                    </select>
+                     
+                    <canvas id="chart-noCovid" width="400" height="400" style="display: none;"></canvas>
+                    <canvas id="chart-noCovid-circular" width="770" height="385" style="display: none;"></canvas>
+                </div>
+    
+            </div>
+            <!--Fin canvas1-->
+
+
+            <!--Inicio canvas 2-->
+            <div id="secundario-covid" class="card" style="display:none;">
+    
+                <div class="card-header">
+                    <span class="title mt-2 mb-2"></span>
+                    <div class="btn-group float-right" role="group">
+                        <button id="regresar-secundario-covid" type="button" class="btn btn-warning mt-2 mb-2" style="color:white;"
+                            onclick="regresarSecundarioCovid()">Regresar</button>
+                    </div>
+                </div>
+    
+                <div class="card-body col-sm-12 row">
+                    <select name="mm" id="mm">
+                        <option value="1">De barras</option>
+                        <option value="2">Circular</option>
+                    </select>
+                    
+                    <canvas id="chart-covid" width="400" height="400" style="display: none;"></canvas>
+                    <canvas id="chart-covid-circular" width="770" height="385" style="display: none;"></canvas>
+                </div>
+    
+            </div>
+            <!--Fin canvas2-->
+
         </div>
+  
 
         <!-- MODAL ENFERMEDADES BASE -->
         <div class="modal" id="modal-enfermedades" tabindex="-1" role="dialog">
