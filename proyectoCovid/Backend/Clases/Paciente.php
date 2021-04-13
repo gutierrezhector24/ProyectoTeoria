@@ -10,6 +10,7 @@ header("Content-Type: application/json");
         private $sintomas;
         private $ingresoCentroMedico;
         private $diasConSintomas;
+        private $probabilidadRecuperarse;
 
         public function __construct(
             $nombre,
@@ -20,18 +21,20 @@ header("Content-Type: application/json");
             $enfermedadesBase,
             $sintomas,
             $ingresoCentroMedico,
-            $diasConSintomas
+            $diasConSintomas,
+            $probabilidadRecuperarse
         )
         {
-            $this->nombre;
-            $this->identidad;
-            $this->edad;
-            $this->sexo;
-            $this->peso;
-            $this->enfermedadesBase;
-            $this->sintomas;
-            $this->ingresoCentroMedico;
-            $this->diasConSintomas;
+            $this->nombre = $nombre;
+            $this->identidad = $identidad;
+            $this->edad = $edad;
+            $this->sexo = $sexo;
+            $this->peso = $peso;
+            $this->enfermedadesBase = $enfermedadesBase;
+            $this->sintomas = $sintomas;
+            $this->ingresoCentroMedico = $ingresoCentroMedico;
+            $this->diasConSintomas = $diasConSintomas;
+            $this->probabilidadRecupe = $probabilidadRecuperarse;
         }
 
         
@@ -216,29 +219,52 @@ header("Content-Type: application/json");
                 return $this;
         }
 
+
+        /**
+         * Get the value of probabilidadRecuperarse
+         */ 
+        public function getProbabilidadRecuperarse()
+        {
+                return $this->probabilidadRecuperarse;
+        }
+
+        /**
+         * Set the value of probabilidadRecuperarse
+         *
+         * @return  self
+         */ 
+        public function setProbabilidadRecuperarse($probabilidadRecuperarse)
+        {
+                $this->probabilidadRecuperarse = $probabilidadRecuperarse;
+
+                return $this;
+        }
+
         public function verificarPaciente(){
-            $existePaciente = null;
+            $existePaciente = false;
 
             $contenidoArchivoPacientes = $this->getPaciente();
             $pacientes = json_decode($contenidoArchivoPacientes, true);
-            for($cID = 0; $cID < sizeof($pacientes); $cID++){
-                if($this->identidad == $pacientes[$cID]['identidad']){
-                    $existePaciente = true;
-                    break;
-                }else{
-                    $existePaciente = false;
+            
+                for($cID = 0; $cID < sizeof($pacientes); $cID++){
+                        if($this->identidad == $pacientes[$cID]['identidad']){
+                                $existePaciente = true;
+                        break;
+                        }
                 }
-            }
+             
 
             if($existePaciente == false){
-                $this->guardarPaciente($pacientes);
+                $this->guardarPaciente();
                 return true;
             }else{
                 return false;
             }
         }
 
-        public function guardarPaciente($pacientes){
+        public function guardarPaciente(){
+                $pacientes = json_decode($this->getPaciente(), true);
+
             $pacientes[] = array(
                 "nombre" => $this->nombre,
                 "identidad" => $this->identidad,
@@ -257,7 +283,7 @@ header("Content-Type: application/json");
 
         }
 
-        public function getPaciente(){
+        public static function getPaciente(){
             return file_get_contents('../Datos/pacientes.json');
         }
 
@@ -270,11 +296,20 @@ header("Content-Type: application/json");
                             $paciente = $pacientes[$cPacientes];
                         break;
                         }
-                    }
+                }
 
-                echo json_encode(array(
-                        "paciente" => $paciente
-                ));
+                if($paciente == null){
+                        return false;
+                        // echo json_encode(array(
+                        //         "paciente" => $paciente
+                        // ));  
+                }else{
+                        return $paciente;
+                        // echo json_encode(array(
+                        //         "paciente" => true
+                        // ));
+                }
+
         }
+
     }
-?>
