@@ -38,8 +38,12 @@
 }
 
 .contP{
+    background: #09ccee;  
+    background: -webkit-linear-gradient(to right, #09ccee, #00eeff,#00ffd5);  
+    background: linear-gradient(to right, #09ccee, #00eeff,#00ffd5); 
+    background-repeat: no-repeat;
+    background-position:center;
     background-size: cover;
-    background-color: rgba(0, 183, 255, 0.075);
 }
 
 .thead-dark{
