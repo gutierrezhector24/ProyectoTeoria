@@ -1,6 +1,8 @@
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
+var selectEnfermedades2 = document.getElementById("enfermedades-base-n")
 var selectSintomas = document.getElementById("s-sintomas");
+var selectSintomas2 = document.getElementById("s-sintomas-n");
 selectPrincipal.value = 0;
 var enfermedadesBase = [];
 var sintomas = [];
@@ -89,7 +91,9 @@ var jsonValoresCOVID = {
 
 selectPrincipal.addEventListener('change', actualizar);
 selectEnfermedades.addEventListener('change', analizarOpcion);
-selectSintomas.addEventListener('change', analizarOpcionSintomas)
+selectSintomas.addEventListener('change', analizarOpcionSintomas);
+selectEnfermedades2.addEventListener('change', analizarOpcion);
+selectSintomas2.addEventListener('change', analizarOpcionSintomas);
 
 function actualizar(e){
     let valorActualSelect = e.target.value;
@@ -182,16 +186,20 @@ var mostrarError = function(e){
 function reestablecerValorEB(){
     if(comprobarCheckEnfermedades() == true){
         selectEnfermedades.value = 1;
+        selectEnfermedades2.value = 1;
     }else{
         selectEnfermedades.value = 0;
+        selectEnfermedades2.value = 0;
     }
 }
 
 function reestablecerValorS(){
     if(comprobarCheckSintomas() == true){
         selectSintomas.value = 1;
+        selectEnfermedades2.value = 1;
     }else{
         selectSintomas.value = 0;
+        selectEnfermedades2.value = 0;
     }
 }
 
@@ -277,17 +285,23 @@ function guardarSintomas(){
 }
 
 function comprobarArregloEnfermedadesBase(){
-    if(enfermedadesBase.length == 0)
+    if(enfermedadesBase.length == 0){
         selectEnfermedades.value = 0;
-    else
+        selectEnfermedades2.value = 0;
+    }else{
         selectEnfermedades.value = 1;
+        selectEnfermedades2.value = 1;
+    }
 }
 
 function comprobarArregloSintomas(){
-    if(sintomas.length == 0)
+    if(sintomas.length == 0){
         selectSintomas.value = 0;
-    else
-        selectSintomas.value = 1;
+        selectSintomas2.value = 0;
+    }else{
+        selectSintomas.value = 1,
+        selectSintomas2.value = 1;
+    }
 }
 
 function limpiarArregloEnfermedadesBase(){
@@ -363,39 +377,51 @@ function simularCovid(){
    //mandar parametros de validacion de formulario
    let tipoCovid = selectorM.value;
    mostrarSimularCovid();
-   graficarCovid(tipoCovid, datosCovid);
+   if(tipoCovid == 1){
+     graficarCovidBarras(tipoCovid, datosCovid);
+   }else{
+      graficarCovidCircular(tipoCovid, datosCovid);
+   }
+   
 }
 
 function simularNoCovid(){
    //mandar parametros de validacion de formulario
    let tipoNoCovid = selectorN.value;
-   graficarNoCovid(tipoNoCovid, datosNoCovid);
    mostrarSimularNoCovid();
+   if(tipoNoCovid == 1){
+      graficarNoCovidBarras(tipoNoCovid, datosNoCovid);
+   }else{
+      graficarNoCovidCircular(tipoNoCovid, datosNoCovid);
+   }
 }
 
-function graficarCovid(tipo, datos){
+function graficarCovidBarras(tipo, datos){
   graficaBarrasCovid(datos);
-  graficaCircularCovid(datos);
-  //console.log()
-  tipo == 1 ? mostrarBarrasCovid() : mostrarCircularCovid();
+  mostrarBarrasCovid(); 
 }
 
-function graficarNoCovid(tipo, datos){
+function graficarCovidCircular(tipo, datos){
+   graficaCircularCovid(datos);
+   mostrarCircularCovid();
+}
+
+function graficarNoCovidBarras(tipo, datos){
    graficaBarrasNoCovid(datos);
+   mostrarBarrasNoCovid();
+}
+
+function graficarNoCovidCircular(tipo, datos){
    graficaCircularNoCovid(datos);
-   tipo == 1 ? mostrarBarrasNoCovid() : mostrarCircularNoCovid();
+   mostrarCircularNoCovid();
 }
 
 function mostrarBarrasCovid(){
-   covidCircular = 0;
-   covidBarras = 1;
    ocultarCircularCovid();
    document.getElementById('chart-covid').style.display = 'block';
 }
 
 function mostrarCircularCovid(){
-   covidBarras = 0;
-   covidCircular = 1;
    ocultarBarrasCovid();
    document.getElementById('chart-covid-circular').style.display = 'block';
 }
@@ -406,6 +432,24 @@ function ocultarBarrasCovid(){
 
 function ocultarCircularCovid(){
    document.getElementById('chart-covid-circular').style.display = 'none';
+}
+
+function mostrarBarrasNoCovid(){
+   ocultarCircularNoCovid();
+   document.getElementById('chart-noCovid').style.display = 'block';
+}
+
+function mostrarCircularNoCovid(){
+   ocultarBarrasNoCovid();
+   document.getElementById('chart-noCovid-circular').style.display = 'block';
+}
+
+function ocultarBarrasNoCovid(){
+   document.getElementById('chart-noCovid').style.display = 'none';
+}
+
+function ocultarCircularNoCovid(){
+   document.getElementById('chart-noCovid-circular').style.display = 'none';
 }
 
 function graficaBarrasCovid(datos){
@@ -422,16 +466,16 @@ function graficaBarrasCovid(datos){
             data: [datos["valorBase"], datos["probabilidadRecuperarse"],
                    datos["probabilidadMorir"], datos["valorEnfermedades"]],
             backgroundColor: [
-               'rgba(255, 99, 132, 0.2)',
-               'rgba(54, 162, 235, 0.2)',
-               'rgba(255, 206, 86, 0.2)',
-               'rgba(75, 192, 192, 0.2)'
+                'rgba(9, 216, 243, 0.3)',
+                'rgba(112, 255, 45, 0.3)',
+                'rgba(243, 208, 9, 0.3)',
+                'rgba(204, 9, 243, 0.3)'
             ],
             borderColor: [
-               'rgba(255, 99, 132, 1)',
-               'rgba(54, 162, 235, 1)',
-               'rgba(255, 206, 86, 1)',
-               'rgba(75, 192, 192, 1)'
+                'rgba(9, 216, 243, 1)',
+                'rgba(112, 255, 45, 1)',
+                'rgba(243, 208, 9, 1)',
+                'rgba(204, 9, 243, 1)'
             ],
             borderWidth: 1
          }]
@@ -450,7 +494,7 @@ function graficaBarrasCovid(datos){
 
 function graficaCircularCovid(datos){
  
-   let titulo = 'No Covid';
+   let titulo = 'Covid';
 
    let ctxCovidCircular = document.getElementById("chart-covid-circular");
    let dataCovidCircular = {
@@ -459,16 +503,16 @@ function graficaCircularCovid(datos){
          data: [datos["valorBase"], datos["probabilidadRecuperarse"],
                 datos["probabilidadMorir"], datos["valorEnfermedades"]],
          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)'
+             'rgba(9, 216, 243, 0.3)',
+             'rgba(112, 255, 45, 0.3)',
+             'rgba(243, 208, 9, 0.3)',
+             'rgba(204, 9, 243, 0.3)'
          ],
          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)'
+             'rgba(9, 216, 243, 1)',
+             'rgba(112, 255, 45, 1)',
+             'rgba(243, 208, 9, 1)',
+             'rgba(204, 9, 243, 1)'
          ],
          borderWidth: 1
       }],
@@ -482,41 +526,94 @@ function graficaCircularCovid(datos){
 
 }
 
-function graficaBarrasNoCovid(){
+function graficaBarrasNoCovid(datos){
+
+   let titulo = 'No Covid';
+
+   let ctxBarrasNoCovid = document.getElementById('chart-noCovid').getContext('2d');
+   let chartBarrasNoCovid = new Chart(ctxBarrasNoCovid, {
+      type: 'bar',
+      data: {
+         labels: ['Base', 'Positivo', 'Negativo', 'Enfermedades'],
+         datasets: [{
+            label: titulo,
+            data: [datos["valorBase"], datos["probabilidadPositivo"],
+                   datos["probabilidadNegativo"], datos["valorEnfermedades"]],
+            backgroundColor: [
+                'rgba(9, 216, 243, 0.3)',
+                'rgba(112, 255, 45, 0.3)',
+                'rgba(243, 208, 9, 0.3)',
+                'rgba(204, 9, 243, 0.3)'
+            ],
+            borderColor: [
+                'rgba(9, 216, 243, 1)',
+                'rgba(112, 255, 45, 1)',
+                'rgba(243, 208, 9, 1)',
+                'rgba(204, 9, 243, 1)'
+            ],
+            borderWidth: 1
+         }]
+      },
+      options: {
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero: true
+               }
+            }]
+         }
+      }
+   });
 
 }
 
-function graficaCircularNoCovid(){
+function graficaCircularNoCovid(datos){
+
+   let titulo = 'No Covid';
+
+   let ctxNoCovidCircular = document.getElementById("chart-noCovid-circular");
+   let dataNoCovidCircular = {
+      datasets: [{
+         label: titulo,
+         data: [datos["valorBase"], datos["probabilidadPositivo"],
+                datos["probabilidadNegativo"], datos["valorEnfermedades"]],
+         backgroundColor: [
+             'rgba(9, 216, 243, 0.3)',
+             'rgba(112, 255, 45, 0.3)',
+             'rgba(243, 208, 9, 0.3)',
+             'rgba(204, 9, 243, 0.3)'
+         ],
+         borderColor: [
+             'rgba(9, 216, 243, 1)',
+             'rgba(112, 255, 45, 1)',
+             'rgba(243, 208, 9, 1)',
+             'rgba(204, 9, 243, 1)'
+         ],
+         borderWidth: 1
+      }],
+      labels: ['Base', 'Positivo', 'Negativo', 'Enfermedades']
+   };
+
+   let myPieChartCovid = new Chart(ctxNoCovidCircular, {
+      type: 'pie',
+      data: dataNoCovidCircular
+   });
 
 }
 
+selectorM.addEventListener('change', actualiza);
 
-selectorM.addEventListener('change', actualizar);
+function actualiza(e){
+    let valorAct = e.target.value;
+    console.log(valorAct);
+    simularCovid();
+}
 
-function actualizar(e){
-   //console.log(llamadasBarras);
-   //console.log(ventasBarras);
-   //console.log(montosBarras);
+selectorN.addEventListener('change', actualizaN);
 
-   let valorActual = e.target.value;
-   //console.log(valorActual);
-   if(valorActual == 1){ //Es gráfica de barras
-      //if(covidBarras == 1){
-      mostrarBarrasCovid();
-      //}else if(ventasBarras == 1){
-         //verVentas();
-      //}else{
-         //mostrarCircularCovid();
-      //}
-   }else{ //Es gráfica circular
-      mostrarCircularCovid();
-      /*if(mo == 1){
-         verLlamadasCircular();
-      }else if(ventasBarras == 1){
-         verVentasCircular();
-      }else{
-         verMontosCircular();
-      }*/
-   }
+function actualizaN(e){
+   let valorActN = e.target.value;
+   console.log(valorActN)
+   simularNoCovid();
 }
 
