@@ -9,70 +9,137 @@ var sintomas = [];
 var jsonValoresCOVID = {
     enfermedadesBase: {
         hipertension: {
-            valorPeligro: 0
+            valorPeligro: 9
         },
         diabetes: {
-            valorPeligro: 0
+            valorPeligro: 9
         },
         cancer: {
-            valorPeligro: 0
+            valorPeligro: 9
+        },
+        enfermedadesPulmonares: {
+            valorPeligro: 8
         }
     },
     sintomas: {
         congestionNasal: {
-            valorPeligro: 0
+            valorPeligro: 2
         },
         malestarGarganta: {
-            valorPeligro: 0
+            valorPeligro: 5
         },
         dolorCorporal: {
-            valorPeligro: 0
+            valorPeligro: 5
         },
         dolorOjos: {
-            valorPeligro: 0
+            valorPeligro: 3
         },
         dolorCabeza: {
-            valorPeligro: 0
+            valorPeligro: 4
         },
         vomito: {
-            valorPeligro: 0
+            valorPeligro: 7
         },
         diarrea: {
-            valorPeligro: 0
+            valorPeligro: 7
         },
         decaimiento: {
-            valorPeligro: 0
+            valorPeligro: 2
         },
         fiebre: {
-            valorPeligro: 0
+            valorPeligro: 9
         },
         perdidaGustoOlfato: {
-            valorPeligro: 0
+            valorPeligro: 10
         },
         opresionPecho: {
-            valorPeligro: 0
+            valorPeligro: 7
         },
         cansancio: {
-            valorPeligro: 0
+            valorPeligro: 5
+        },
+        sudoracion: {
+            valorPeligro: 2
         }
     },
+
     edad: {
-        ceroDiecisiete: {
-            valorPeligro: 0
+        ceroVeinte: {
+            valorPeligro: 2
         },
-        dieciochoTreinticinco: {
-            valorPeligro: 0
+        veintiunoCuarenta: {
+            valorPeligro: 9
         },
-        treintiseisCincuenta: {
-            valorPeligro: 0
+        cuarentayunoSesenta: {
+            valorPeligro: 6
         },
-        cincuentayunoMas: {
-            valorPeligro: 0
+        sesentaMas: {
+            valorPeligro: 7
         }
     },
-    peso: {
+    sexo: {
+        masculino: {
+            valorPeligro: 3
+        },
+        femenino: {
+            valorPeligro: 1
+        }
+    },
+    IMC: {
+        dieciochopuntocincoVeinticuatropuntonueve: {
+            valorPeligro: 4
+        },
+        veinticincoVeintinuevepuntonueve: {
+            valorPeligro: 6
+        },
+        trientaTreintaycuatropuntonueve: {
+            valorPeligro: 7
+        },
+        treintaycincoTreintaynuevepuntonueve: {
+            valorPeligro: 8
+        },
+        cuarentaMas: {
+            valorPeligro: 10
+        }
 
     },
+    ingresoCentroMedico: {
+        unoasietedias: {
+            valorPeligro: 9
+        },
+        unoacatorcedias: {
+            valorPeligro: 7
+        },
+        unoaveintiundias: {
+            valorPeligro: 10
+        }
+
+    },
+    ejercicio: {
+        poco: {
+            valorPeligro: 0
+        },
+        intermedio: {
+            valorPeligro: 0
+        },
+        mucho: {
+            valorPeligro: 0
+        }
+
+    },
+    visitaATribalesHospitales: {
+        poco: {
+            valorPeligro: 4
+        },
+        medio: {
+            valorPeligro: 6
+        },
+        frecuentemente: {
+            valorPeligro: 9
+        }
+
+    },
+
     diasConSintomas: {
         unoTres: {
             valorPeligro: 0
@@ -85,6 +152,157 @@ var jsonValoresCOVID = {
         },
         diecinueveMas: {
             valorPeligro: 0
+        }
+    }
+}
+
+var jsonValoresNOCOVID = {
+    enfermedadesBase: {
+        hipertension: {
+            valorPeligro: 8
+        },
+        diabetes: {
+            valorPeligro: 8
+        },
+        cancer: {
+            valorPeligro: 8
+        },
+        enfermedadesPulmonares: {
+            valorPeligro: 7
+        }
+    },
+    sintomas: {
+        congestionNasal: {
+            valorPeligro: 1
+        },
+        malestarGarganta: {
+            valorPeligro: 4
+        },
+        dolorCorporal: {
+            valorPeligro: 4
+        },
+        dolorOjos: {
+            valorPeligro: 2
+        },
+        dolorCabeza: {
+            valorPeligro: 3
+        },
+        vomito: {
+            valorPeligro: 6
+        },
+        diarrea: {
+            valorPeligro: 6
+        },
+        decaimiento: {
+            valorPeligro: 1
+        },
+        fiebre: {
+            valorPeligro: 8
+        },
+        perdidaGustoOlfato: {
+            valorPeligro: 9
+        },
+        opresionPecho: {
+            valorPeligro: 6
+        },
+        cansancio: {
+            valorPeligro: 4
+        },
+        sudoracion: {
+            valorPeligro: 1
+        }
+    },
+    edad: {
+        ceroVeinte: {
+            valorPeligro: 1
+        },
+        veintiunoCuarenta: {
+            valorPeligro: 8
+        },
+        cuarentayunoSesenta: {
+            valorPeligro: 5
+        },
+        sesentaMas: {
+            valorPeligro: 6
+        }
+    },
+    sexo: {
+        masculino: {
+            valorPeligro: 2
+        },
+        femenino: {
+            valorPeligro: 0
+        }
+    },
+    frecuenciaLavado: {
+        nunca: {
+            valorPeligro: 9
+        },
+        poco: {
+            valorPeligro: 7
+        },
+        frecuentemente: {
+            valorPeligro: 2
+        }
+
+    },
+    usoTipoDesinfectante: {
+        cloro: {
+            valorPeligro: -4
+        },
+        amonio: {
+            valorPeligro: -3
+        },
+        alcoholSetentaPorciento: {
+            valorPeligro: -6
+        },
+        alcoholNoventayseisPorciento: {
+            valorPeligro: -2
+        }
+
+    },
+    usoMascarilla: {
+        nunca: {
+            valorPeligro: 9
+        },
+        poco: {
+            valorPeligro: 7
+        },
+        frecuentemente: 1
+    },
+    cantidadGenteEnLugares: {
+        menosCincuenta: {
+            valorPeligro: 2
+        },
+        cincuentayunoCientoCincuenta: {
+            valorPeligro: 5
+        },
+        cientoCicuentayUnoMas: {
+            valorPeligro: 9
+        }
+    },
+    ejercicio: {
+        poco: {
+            valorPeligro: 0
+        },
+        intermedio: {
+            valorPeligro: 0
+        },
+        mucho: {
+            valorPeligro: 0
+        }
+
+    },
+
+    visitaATribalesHospitales: {
+        poco: {
+            valorPeligro: 2
+        },
+        medio: {
+            valorPeligro: 7
+        },
+        frecuentemente: {
+            valorPeligro: 10
         }
     }
 }
@@ -208,11 +426,13 @@ function comprobarCheckEnfermedades(){
     let hipertension = document.getElementById('hipertension');
     let cancer = document.getElementById('cancer');
     let diabetes = document.getElementById('diabetes');
+    let enfermedadesPulmonares = document.getElementById('enfermedadesPulmonares');
 
     if (
         hipertension.checked == false &&
         cancer.checked == false &&
-        diabetes.checked == false
+        diabetes.checked == false &&
+        enfermedadesPulmonares.checked == false
     ){
         retorno = false;
     }else{
@@ -239,6 +459,7 @@ function comprobarCheckSintomas(){
     let perdidaGustoOlfato = document.getElementById("perdida-gusto-olfato");
     let opresionPecho = document.getElementById("opresion-pecho");
     let cansancio = document.getElementById("cansancio");
+    let sudoracion = document.getElementById("sudoracion");
 
     if(
         tos.checked == false &&
@@ -253,7 +474,8 @@ function comprobarCheckSintomas(){
         fiebre.checked == false &&
         perdidaGustoOlfato.checked == false &&
         opresionPecho.checked == false &&
-        cansancio.checked == false 
+        cansancio.checked == false &&
+        sudoracion.checked == false 
     ){
         retorno == false;
     }else{
