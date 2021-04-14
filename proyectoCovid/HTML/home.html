@@ -102,12 +102,23 @@
 
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <span>Práctica del confinamiento</span>
-                        <select class="form-control" name="confinamiento" id="confinamiento">
+                        <span>Cantidad de personas en lugares donde visita</span>
+                        <select class="form-control" name="cantidad-personas" id="cantidad-personas">
                             <option value="">Seleccione una opción</option>
-                            <option value="1">Poco</option>
-                            <option value="2">Medio</option>
-                            <option value="3">Mucho</option>
+                            <option value="1">Menos de 50</option>
+                            <option value="2">51-150</option>
+                            <option value="3">Mas de 151</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span>Tipo de desinfectante que utiliza</span>
+                        <select class="form-control" name="tipo-desinfectante" id="tipo-desinfectante">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Cloro</option>
+                            <option value="2">Amonio</option>
+                            <option value="3">Alcohol al 70%</option>
+                            <option value="3">Alcohol al 96%</option>
                         </select>
                     </div>
                 </div>
@@ -155,6 +166,7 @@
                         <span>Peso</span>
                         <input id="peso" type="number" class="form-control" placeholder="Ingrese su peso en Libras">
                     </div>
+
                     <div class="col-md-6">
                         <span>Enfermedades base</span>
                         <select class="form-control" name="enfermedades-base" id="enfermedades-base">
@@ -181,6 +193,23 @@
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
                             <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Tipo de Sangre</span>
+                        <input id="tipo-sangre" type="text" class="form-control" placeholder="Ingrese su tipo de sangre">
+                    </div>
+
+                    <div class="col-md-6">
+                        <span>Ejercicio</span>
+                        <select class="form-control" name="ejercicio" id="ejercicio">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Poco</option>
+                            <option value="2">Intermedio</option>
+                            <option value="3">Mucho</option>
                         </select>
                     </div>
                 </div>
@@ -287,6 +316,9 @@
                         <input type="checkbox" id="cancer" name="cancer" value="cancer">
                         <label for="cancer">Cáncer</label><br>
 
+                        <input type="checkbox" id="enfermedades-pulmonares" name="enfermedades-pulmonares" value="enfermedades-pulmonares">
+                        <label for="enfermedades-pulmonares">Enfermedades Pulmonares</label><br>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -349,7 +381,9 @@
                         
                         <input type="checkbox" id="cansancio" name="cansancio" value="cansancio">
                         <label for="cansancio">Cansancio</label><br>
-
+                        
+                        <input type="checkbox" id="sudoracion" name="sudoracion" value="sudoracion">
+                        <label for="sudoracion">Sudoración</label><br>
                     </div>
                 </div>
                 <div class="modal-footer">
