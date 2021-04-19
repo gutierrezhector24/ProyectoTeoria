@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Simulador COVID</title>
+    <link rel="shortcut icon" href="img/icons8-microbe-48.png">
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -50,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <span>Sexo</span>
-                        <select name="sexo-n" id="sexo" class="form-control">
+                        <select name="sexo-n" id="sexo-n" class="form-control">
                             <option value="">Seleccione una opción</option>
                             <option value="1">Femenino</option>
                             <option value="2">Masculino</option>
@@ -126,7 +127,7 @@
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
                         <button id="regresar-no-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-no-covid" type="button" class="btn btn-outline-info" onclick="simularNoCovid()">Simular</button>
+                        <button id="simular-no-covid" type="button" class="btn btn-outline-info" onclick="simular()">Simular</button>
                     </div>
                 </div>
 
@@ -200,7 +201,17 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <span>Tipo de Sangre</span>
-                        <input id="tipo-sangre" type="text" class="form-control" placeholder="Ingrese su tipo de sangre">
+                        <select name="tipo-sangre" id="tipo-sangre" class="form-control">
+                            <option value="">Seleccione una</option>
+                            <option value="">A+</option>
+                            <option value="">A-</option>
+                            <option value="">B+</option>
+                            <option value="">B-</option>
+                            <option value="">AB+</option>
+                            <option value="">AB-</option>
+                            <option value="">O+</option>
+                            <option value="">O-</option>
+                        </select>
                     </div>
 
                     <div class="col-md-6">
@@ -230,7 +241,7 @@
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
                         <button id="regresar-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-covid" type="button" class="btn btn-outline-info" onclick="simularCovid()">Simular</button>
+                        <button id="simular-covid" type="button" class="btn btn-outline-info" onclick="simular()">Simular</button>
                     </div>
                 </div>
 

@@ -1,11 +1,18 @@
+var rutaCovid = './Backend/API/Pacientes.php';
+var rutaNoCovid = './Backend/API/PacientesN.php';
+
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
-var selectEnfermedades2 = document.getElementById("enfermedades-base-n")
+var selectEnfermedades2 = document.getElementById("enfermedades-base-n");
 var selectSintomas = document.getElementById("s-sintomas");
 var selectSintomas2 = document.getElementById("s-sintomas-n");
+var covid;
+
 selectPrincipal.value = 0;
 var enfermedadesBase = [];
 var sintomas = [];
+var enfermedadesBaseNoCovid = [];
+var sintomasNoCovid = [];
 var jsonValoresCOVID = {
     enfermedadesBase: {
         hipertension: {
@@ -314,13 +321,16 @@ selectEnfermedades2.addEventListener('change', analizarOpcion);
 selectSintomas2.addEventListener('change', analizarOpcionSintomas);
 
 function actualizar(e){
+
     let valorActualSelect = e.target.value;
     console.log(valorActualSelect);
     if (valorActualSelect == 0){
         mostrarAdvertencia();
     }else if(valorActualSelect == 1){
+        covid = 1;
         mostrarCovid();
     }else if(valorActualSelect == 2){
+        covid = 0;
         mostrarNoCovid();
     }else{
         mostrarError();
@@ -335,9 +345,28 @@ function analizarOpcion(e){
 }
 
 function analizarOpcionSintomas(e){
+    console.log(e.target.value);
     let valorActualSintomas = e.target.value;
     if (valorActualSintomas == 1){
         mostrarModalSintomas();
+    }
+}
+
+function analizarOpcionNoCovid(e){
+    console.log("349");
+    console.log(e.target.value);
+    let valorSINO = e.target.value;
+    if(valorSINO == 1){
+        mostrarModalEnfermedadesNoCovid();
+    }
+}
+
+function analizarOpcionSintomasNoCovid(e){
+    console.log("357");
+    console.log(e.target.value);
+    let valorActualSintomas = e.target.value;
+    if (valorActualSintomas == 1){
+        mostrarModalSintomasNoCovid();
     }
 }
 
@@ -356,6 +385,7 @@ var mostrarModalSintomas = function(){
 var ocultarModalSintomas = function(){
     $('#modal-sintomas').modal('hide');
 }
+
 
 function mostrarAdvertencia(){
     alert("Seleccione una opción");
@@ -571,23 +601,14 @@ function mostrarPrincipal(){
     location.reload();
 }
 // input[type=checkbox]:checked
-
-
-
-//variables imprevistas
-var datosCovid = {
-   valorEnfermedades: 100,
-   probabilidadMorir: 20,
-   probabilidadRecuperarse: 80,
-   valorBase: 100
+function mostrarCanvasCovid(){
+    document.getElementById('secundario-covid').style.display = 'block';
 }
 
-var datosNoCovid = {
-   valorEnfermedades: 100,
-   probabilidadPositivo: 60,
-   probabilidadNegativo: 40,
-   valorBase: 100
+function mostrarCanvasNoCovid(){
+    document.getElementById('secundario-noCovid').style.display = 'block';
 }
+
 
 var selectorM = document.querySelector('#mm');
 var selectorN = document.querySelector('#nn');
@@ -598,13 +619,54 @@ var covidCircular;
 function simularCovid(){
    //mandar parametros de validacion de formulario
    let tipoCovid = selectorM.value;
-   mostrarSimularCovid();
+   let datosCovid = {};
+   ocultarCovid();
    if(tipoCovid == 1){
-     graficarCovidBarras(tipoCovid, datosCovid);
+       datosCovid = obtenerDatosCovid();
+       enviarDatos(datosCovid);
+        // graficarCovidBarras(tipoCovid, datosCovid);
    }else{
-      graficarCovidCircular(tipoCovid, datosCovid);
+    //   graficarCovidCircular(tipoCovid, datosCovid);
    }
-   
+}
+
+function obtenerDatosCovid(){
+    return {
+        nombre: document.getElementById('nombre').value,
+        identidad: document.getElementById('identidad').value,
+        edad: document.getElementById('edad').value,
+        sexo: document.getElementById('sexo').value,
+        peso: document.getElementById('peso').value,
+        enfermedadesBase: enfermedadesBase,
+        sintomas: sintomas,
+        ingresoCentroMedico: document.getElementById('ingreso').value,
+        tipoSangre: document.getElementById('tipo-sangre').value,
+        ejercicio: document.getElementById('ejercicio').value,
+        diasConSintomas: document.getElementById('dias-con-sintomas').value,
+        probabilidadRecuperarse: 0
+    }
+}
+
+function obtenerDatosNoCovid(){
+    return {
+        nombre: document.getElementById('nombre').value,
+        identidad: document.getElementById('identidad').value,
+        edad: document.getElementById('edad').value,
+        sexo: document.getElementById('sexo').value,
+        peso: document.getElementById('peso').value,
+        sintomas: sintomas,
+        enfermedadesBase: enfermedadesBase,
+        frecuenciaLavado: document.getElementById('lavado-manos').value,
+        usoMascarilla: document.getElementById('uso-mascarilla').value,
+        cantidadGenteEnLugares: document.getElementById('cantidad-personas').value,
+        usoTipoDesinfectante: document.getElementById('tipo-desinfectante').value,
+        ejercicio: document.getElementById('ejercicio').value,
+        probabilidadCovid: 0
+    }
+}
+
+function enviarDatos(){
+    // Aquí va la función que envía los datos a PHP
 }
 
 function simularNoCovid(){
@@ -839,3 +901,10 @@ function actualizaN(e){
    simularNoCovid();
 }
 
+function simular(){
+    if(covid == 1){
+        simularCovid();
+    }else{
+        simularNoCovid();
+    }
+}

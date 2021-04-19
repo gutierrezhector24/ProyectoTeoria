@@ -9,6 +9,8 @@ header("Content-Type: application/json");
         private $enfermedadesBase;
         private $sintomas;
         private $ingresoCentroMedico;
+        private $tipoSangre;
+        private $ejercicio;
         private $diasConSintomas;
         private $probabilidadRecuperarse;
 
@@ -21,6 +23,8 @@ header("Content-Type: application/json");
             $enfermedadesBase,
             $sintomas,
             $ingresoCentroMedico,
+            $tipoSangre,
+            $ejercicio,
             $diasConSintomas,
             $probabilidadRecuperarse
         )
@@ -33,6 +37,8 @@ header("Content-Type: application/json");
             $this->enfermedadesBase = $enfermedadesBase;
             $this->sintomas = $sintomas;
             $this->ingresoCentroMedico = $ingresoCentroMedico;
+            $this->tipoSangre = $tipoSangre;
+            $this->ejercicio = $ejercicio;
             $this->diasConSintomas = $diasConSintomas;
             $this->probabilidadRecupe = $probabilidadRecuperarse;
         }
@@ -200,6 +206,46 @@ header("Content-Type: application/json");
         }
 
         /**
+         * Get the value of tipoSangre
+         */ 
+        public function getTipoSangre()
+        {
+                return $this->tipoSangre;
+        }
+
+        /**
+         * Set the value of tipoSangre
+         *
+         * @return  self
+         */ 
+        public function setTipoSangre($tipoSangre)
+        {
+                $this->tipoSangre = $tipoSangre;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of ejercicio
+         */ 
+        public function getEjercicio()
+        {
+                return $this->ejercicio;
+        }
+
+        /**
+         * Set the value of ejercicio
+         *
+         * @return  self
+         */ 
+        public function setEjercicio($ejercicio)
+        {
+                $this->ejercicio = $ejercicio;
+
+                return $this;
+        }
+
+        /**
          * Get the value of diasConSintomas
          */ 
         public function getDiasConSintomas()
@@ -274,7 +320,10 @@ header("Content-Type: application/json");
                 "enfermedadesBase" => $this->enfermedadesBase,
                 "sintomas" => $this->sintomas,
                 "ingresoCentroMedico" => $this->ingresoCentroMedico,
-                "diasConSintomas" => $this->diasConSintomas
+                "tipoSangre" => $this->tipoSangre,
+                "ejercicio" => $this->ejercicio,
+                "diasConSintomas" => $this->diasConSintomas,
+                "probabilidadRecuperarse" => $this->probabilidadRecuperarse
             );
 
             $archivo = fopen('../Datos/pacientes.json', 'w');
@@ -311,5 +360,6 @@ header("Content-Type: application/json");
                 }
 
         }
+
 
     }

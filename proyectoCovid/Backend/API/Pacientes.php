@@ -16,6 +16,8 @@ session_start();
                 $_POST['enfermedadesBase'],
                 $_POST['sintomas'],
                 $_POST['ingresoCentroMedico'],
+                $_POSST['tipoSangre'],
+                $_POST['ejercicio'],
                 $_POST['diasConSintomas'],
                 $_POST['probabilidadRecuperarse']
             );
