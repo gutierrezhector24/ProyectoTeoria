@@ -1,1 +1,170 @@
-[]
+[
+    {
+        "nombre": "Jonh Connor 2",
+        "identidad": "012331232",
+        "edad": {
+            "ceroDiecisiete": {
+                "valorPeligro": 0
+            },
+            "dieciochoTreinticinco": {
+                "valorPeligro": 0
+            },
+            "treintiseisCincuenta": {
+                "valorPeligro": 0
+            },
+            "cincuentayunoMas": {
+                "valorPeligro": 0
+            }
+        },
+        "sexo": "Masculino",
+        "peso": "67",
+        "enfermedadesBase": {
+            "hipertension": {
+                "valorPeligro": 0
+            },
+            "diabetes": {
+                "valorPeligro": 0
+            },
+            "cancer": {
+                "valorPeligro": 0
+            }
+        },
+        "sintomas": {
+            "congestionNasal": {
+                "valorPeligro": 0
+            },
+            "malestarGarganta": {
+                "valorPeligro": 0
+            },
+            "dolorCorporal": {
+                "valorPeligro": 0
+            },
+            "dolorOjos": {
+                "valorPeligro": 0
+            },
+            "dolorCabeza": {
+                "valorPeligro": 0
+            },
+            "vomito": {
+                "valorPeligro": 0
+            },
+            "diarrea": {
+                "valorPeligro": 0
+            },
+            "decaimiento": {
+                "valorPeligro": 0
+            },
+            "fiebre": {
+                "valorPeligro": 0
+            },
+            "perdidaGustoOlfato": {
+                "valorPeligro": 0
+            },
+            "opresionPecho": {
+                "valorPeligro": 0
+            },
+            "cansancio": {
+                "valorPeligro": 0
+            }
+        },
+        "ingresoCentroMedico": true,
+        "diasConSintomas": {
+            "unoTres": {
+                "valorPeligro": 0
+            },
+            "cuatroDiez": {
+                "valorPeligro": 0
+            },
+            "onceDieciocho": {
+                "valorPeligro": 0
+            },
+            "diecinueveMas": {
+                "valorPeligro": 0
+            }
+        }
+    },
+    {
+        "nombre": "Jonh Connor 3",
+        "identidad": "12312312331232",
+        "edad": {
+            "ceroDiecisiete": {
+                "valorPeligro": 0
+            },
+            "dieciochoTreinticinco": {
+                "valorPeligro": 0
+            },
+            "treintiseisCincuenta": {
+                "valorPeligro": 0
+            },
+            "cincuentayunoMas": {
+                "valorPeligro": 0
+            }
+        },
+        "sexo": "Masculino",
+        "peso": "67",
+        "enfermedadesBase": {
+            "hipertension": {
+                "valorPeligro": 0
+            },
+            "diabetes": {
+                "valorPeligro": 0
+            },
+            "cancer": {
+                "valorPeligro": 0
+            }
+        },
+        "sintomas": {
+            "congestionNasal": {
+                "valorPeligro": 0
+            },
+            "malestarGarganta": {
+                "valorPeligro": 0
+            },
+            "dolorCorporal": {
+                "valorPeligro": 0
+            },
+            "dolorOjos": {
+                "valorPeligro": 0
+            },
+            "dolorCabeza": {
+                "valorPeligro": 0
+            },
+            "vomito": {
+                "valorPeligro": 0
+            },
+            "diarrea": {
+                "valorPeligro": 0
+            },
+            "decaimiento": {
+                "valorPeligro": 0
+            },
+            "fiebre": {
+                "valorPeligro": 0
+            },
+            "perdidaGustoOlfato": {
+                "valorPeligro": 0
+            },
+            "opresionPecho": {
+                "valorPeligro": 0
+            },
+            "cansancio": {
+                "valorPeligro": 0
+            }
+        },
+        "ingresoCentroMedico": true,
+        "diasConSintomas": {
+            "unoTres": {
+                "valorPeligro": 0
+            },
+            "cuatroDiez": {
+                "valorPeligro": 0
+            },
+            "onceDieciocho": {
+                "valorPeligro": 0
+            },
+            "diecinueveMas": {
+                "valorPeligro": 0
+            }
+        }
+    }
+]
