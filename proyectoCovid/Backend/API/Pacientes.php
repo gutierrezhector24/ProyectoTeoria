@@ -13,11 +13,13 @@ session_start();
                 $_POST['edad'],
                 $_POST['sexo'],
                 $_POST['peso'],
+                $_POST['estatura'],
                 $_POST['enfermedadesBase'],
                 $_POST['sintomas'],
                 $_POST['ingresoCentroMedico'],
-                $_POST['diasConSintomas'],
-                $_POST['probabilidadRecuperarse']
+                $_POST['tipoSangre'],
+                $_POST['ejercicio'],
+                $_POST['diasConSintomas']
             );
 
             if($paciente->verificarPaciente()){
@@ -33,6 +35,8 @@ session_start();
             echo json_encode($resultado);
         break;
         case 'GET':
+            // $paciente = Paciente::getPaciente();
+            // echo $paciente;
             $paciente = Paciente::getUnPaciente($_POST['id']);
             if($paciente == false){
                 echo json_encode(array(
@@ -42,10 +46,9 @@ session_start();
                 echo json_encode(array(
                     "estado" => true
                 ));
-                setcookie("id", $paciente['identidad'], time()+(60*60*24*31), "/");
+               setcookie("id", $paciente['identidad'], time()+(60*60*24*31), "/");
             }
         break;
         case 'PUT':
             break;
     }
-?>
