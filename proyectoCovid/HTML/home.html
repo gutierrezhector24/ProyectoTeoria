@@ -19,6 +19,7 @@
     <main class="contP d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="contP"></div>
         <div class="container">
+            <!--formulario inicial-->
             <form id="pregunta-inicial" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5">
                 <div class="form-group">
                     <span for="p-i">Seleccione una opción</span>
@@ -31,6 +32,7 @@
                 </div>
             </form>
 
+            <!--formulario no covid-->
             <form id="no-covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
                 <div class="form-group row">
@@ -62,11 +64,47 @@
                         <input id="edad-n" type="number" class="form-control" placeholder="Ingrese su edad">
                     </div>
                     <div class="col-md-6">
+                        <span>Altura</span>
+                        <input id="altura-n" type="number" class="form-control" placeholder="Ingrese su altura en metros">
+                    </div> 
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Peso</span>
+                        <input id="peso-n" type="number" class="form-control" placeholder="Ingrese su peso en libras">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Tipo de Sangre</span>
+                        <select name="tipo-sangre" id="tipo-sangre" class="form-control">
+                            <option value="0">Seleccione una</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">AB+</option>
+                            <option value="6">AB-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
                         <span>Sexo</span>
                         <select name="sexo-n" id="sexo-n" class="form-control">
                             <option value="">Seleccione una opción</option>
                             <option value="1">Femenino</option>
                             <option value="2">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Enfermedades base</span>
+                        <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
                         </select>
                     </div>
                 </div>
@@ -80,10 +118,9 @@
                             <option value="0">No</option>
                         </select>
                     </div>
-
                     <div class="col-md-6">
-                        <span>Enfermedades base</span>
-                        <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
+                        <span>Ingreso en algún centro médico</span>
+                        <select class="form-control" name="ingreso-n" id="ingreso-n">
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
                             <option value="0">No</option>
@@ -147,6 +184,7 @@
 
             </form>
 
+            <!--formulario covid-->
             <form id="covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
 
@@ -168,55 +206,15 @@
                         <input id="edad" type="number" class="form-control" placeholder="Ingrese su edad">
                     </div>
                     <div class="col-md-6">
-                        <span>Sexo</span>
-                        <select name="sexo" id="sexo" class="form-control">
-                            <option value="0">Seleccione una opción</option>
-                            <option value="1">Femenino</option>
-                            <option value="2">Masculino</option>
-                        </select>
-                    </div>
+                        <span>Altura</span>
+                        <input id="altura" type="number" class="form-control" placeholder="Ingrese su altura en metros">
+                    </div> 
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-6">
                         <span>Peso</span>
-                        <input id="peso" type="number" class="form-control" placeholder="Ingrese su peso (en libras)">
-                    </div>
-                    <div class="col-md-6">
-                        <span>Estatura</span>
-                        <input id="estatura" type="number" class="form-control" placeholder="Ingrese su estatura (en cm)">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <span>Enfermedades base</span>
-                        <select class="form-control" name="enfermedades-base" id="enfermedades-base">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <span>Síntomas</span>
-                        <select class="form-control" name="s-sintomas" id="s-sintomas">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <span>Ingreso en algún centro médico</span>
-                        <select class="form-control" name="ingreso" id="ingreso">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
+                        <input id="peso" type="number" class="form-control" placeholder="Ingrese su peso en libras">
                     </div>
                     <div class="col-md-6">
                         <span>Tipo de Sangre</span>
@@ -232,10 +230,57 @@
                             <option value="8">O-</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Sexo</span>
+                        <select name="sexo" id="sexo" class="form-control">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Enfermedades base</span>
+                        <select class="form-control" name="enfermedades-base" id="enfermedades-base">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                 </div>
+              
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Síntomas</span>
+                        <select class="form-control" name="s-sintomas" id="s-sintomas">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Días con síntomas</span>
+                        <select class="form-control" name="dias-con-sintomas" id="dias-con-sintomas">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">1-3</option>
+                            <option value="2">4-10</option>
+                            <option value="3">11-18</option>
+                            <option value="4">19+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ingreso en algún centro médico</span>
+                        <select class="form-control" name="ingreso" id="ingreso">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <span>Ejercicio</span>
                         <select class="form-control" name="ejercicio" id="ejercicio">
@@ -245,18 +290,7 @@
                             <option value="3">Mucho</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <span>Días con síntomas</span>
-                        <select class="form-control" name="dias-con-sintomas" id="dias-con-sintomas">
-                            <option value="0">Seleccione una opción</option>
-                            <option value="1">1-3</option>
-                            <option value="2">4-10</option>
-                            <option value="3">11-18</option>
-                            <option value="4">19+</option>
-                        </select>
-                    </div>
-                </div>
+                 </div>
 
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
@@ -275,7 +309,7 @@
             </form>
 
 
-            <!--Inicio canvas 1-->
+            <!--Inicio canvas no covid-->
             <div id="secundario-noCovid" class="card mt-5 mb-5" style="display:none;">
 
                 <div class="card-header">
@@ -297,10 +331,10 @@
                 </div>
 
             </div>
-            <!--Fin canvas1-->
+            <!--Fin canvas no covid-->
 
 
-            <!--Inicio canvas 2-->
+            <!--Inicio canvas covid-->
             <div id="secundario-covid" class="card mt-5 mb-5" style="display:none;">
 
                 <div class="card-header">
@@ -322,7 +356,7 @@
                 </div>
 
             </div>
-            <!--Fin canvas2-->
+            <!--Fin canvas covid-->
 
         </div>
 
