@@ -1,170 +1,153 @@
 [
     {
-        "nombre": "Jonh Connor 2",
-        "identidad": "012331232",
-        "edad": {
-            "ceroDiecisiete": {
-                "valorPeligro": 0
-            },
-            "dieciochoTreinticinco": {
-                "valorPeligro": 0
-            },
-            "treintiseisCincuenta": {
-                "valorPeligro": 0
-            },
-            "cincuentayunoMas": {
-                "valorPeligro": 0
+        "012331232": [
+            {
+                "nombre": "Jonh Connor 2",
+                "identidad": "012331232",
+                "edad": "25",
+                "sexo": "Masculino",
+                "peso": "158",
+                "estatura": "178",
+                "enfermedadesBase": [
+                    "hipertension",
+                    "diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal",
+                    "cansancio",
+                    "opresionPecho"
+                ],
+                "ingresoCentroMedico": true,
+                "tipoSangre": "A+",
+                "ejercicio": "Poco",
+                "diasConSintomas": "9",
+                "probabilidadRecuperarse": 0,
+                "fechaIngreso": "20042021"
             }
-        },
-        "sexo": "a diario",
-        "peso": "67",
-        "enfermedadesBase": {
-            "hipertension": {
-                "valorPeligro": 0
-            },
-            "diabetes": {
-                "valorPeligro": 0
-            },
-            "cancer": {
-                "valorPeligro": 0
-            }
-        },
-        "sintomas": {
-            "congestionNasal": {
-                "valorPeligro": 0
-            },
-            "malestarGarganta": {
-                "valorPeligro": 0
-            },
-            "dolorCorporal": {
-                "valorPeligro": 0
-            },
-            "dolorOjos": {
-                "valorPeligro": 0
-            },
-            "dolorCabeza": {
-                "valorPeligro": 0
-            },
-            "vomito": {
-                "valorPeligro": 0
-            },
-            "diarrea": {
-                "valorPeligro": 0
-            },
-            "decaimiento": {
-                "valorPeligro": 0
-            },
-            "fiebre": {
-                "valorPeligro": 0
-            },
-            "perdidaGustoOlfato": {
-                "valorPeligro": 0
-            },
-            "opresionPecho": {
-                "valorPeligro": 0
-            },
-            "cansancio": {
-                "valorPeligro": 0
-            }
-        },
-        "ingresoCentroMedico": true,
-        "diasConSintomas": {
-            "unoTres": {
-                "valorPeligro": 0
-            },
-            "cuatroDiez": {
-                "valorPeligro": 0
-            },
-            "onceDieciocho": {
-                "valorPeligro": 0
-            },
-            "diecinueveMas": {
-                "valorPeligro": 0
-            }
-        }
+        ]
     },
     {
-        "nombre": "Jonh Connor 3",
-        "identidad": "12312312331232",
-        "edad": {
-            "ceroDiecisiete": {
-                "valorPeligro": 0
-            },
-            "dieciochoTreinticinco": {
-                "valorPeligro": 0
-            },
-            "treintiseisCincuenta": {
-                "valorPeligro": 0
-            },
-            "cincuentayunoMas": {
-                "valorPeligro": 0
+        "12312312331232": [
+            {
+                "nombre": "Jonh Connor 3",
+                "identidad": "12312312331232",
+                "edad": "25",
+                "sexo": "Masculino",
+                "peso": "158",
+                "estatura": "178",
+                "enfermedadesBase": [
+                    "hipertension",
+                    "diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal",
+                    "cansancio",
+                    "opresionPecho"
+                ],
+                "ingresoCentroMedico": true,
+                "tipoSangre": "A+",
+                "ejercicio": "Poco",
+                "diasConSintomas": "9",
+                "probabilidadRecuperarse": null,
+                "fechaIngreso": "20042021"
             }
-        },
-        "sexo": "a diario",
-        "peso": "67",
-        "enfermedadesBase": {
-            "hipertension": {
-                "valorPeligro": 0
-            },
-            "diabetes": {
-                "valorPeligro": 0
-            },
-            "cancer": {
-                "valorPeligro": 0
+        ]
+    },
+    {
+        "1232": [
+            {
+                "nombre": "Jonh Connor 4",
+                "identidad": "1232",
+                "edad": "25",
+                "sexo": "Masculino",
+                "peso": "158",
+                "estatura": "178",
+                "enfermedadesBase": [
+                    "hipertension",
+                    "diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal",
+                    "cansancio",
+                    "opresionPecho"
+                ],
+                "ingresoCentroMedico": true,
+                "tipoSangre": "A+",
+                "ejercicio": "Poco",
+                "diasConSintomas": "9",
+                "probabilidadRecuperarse": null,
+                "fechaIngreso": "20-04-2021  01"
             }
-        },
-        "sintomas": {
-            "congestionNasal": {
-                "valorPeligro": 0
-            },
-            "malestarGarganta": {
-                "valorPeligro": 0
-            },
-            "dolorCorporal": {
-                "valorPeligro": 0
-            },
-            "dolorOjos": {
-                "valorPeligro": 0
-            },
-            "dolorCabeza": {
-                "valorPeligro": 0
-            },
-            "vomito": {
-                "valorPeligro": 0
-            },
-            "diarrea": {
-                "valorPeligro": 0
-            },
-            "decaimiento": {
-                "valorPeligro": 0
-            },
-            "fiebre": {
-                "valorPeligro": 0
-            },
-            "perdidaGustoOlfato": {
-                "valorPeligro": 0
-            },
-            "opresionPecho": {
-                "valorPeligro": 0
-            },
-            "cansancio": {
-                "valorPeligro": 0
+        ]
+    },
+    {
+        "123212345": [
+            {
+                "nombre": "Jonh Connor 5",
+                "identidad": "123212345",
+                "edad": "25",
+                "sexo": "Masculino",
+                "peso": "158",
+                "estatura": "178",
+                "enfermedadesBase": [
+                    "hipertension",
+                    "diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal",
+                    "cansancio",
+                    "opresionPecho"
+                ],
+                "ingresoCentroMedico": true,
+                "tipoSangre": "A+",
+                "ejercicio": "Poco",
+                "diasConSintomas": "9",
+                "probabilidadRecuperarse": null,
+                "fechaIngreso": "19-04-2021  17:47:35"
             }
-        },
-        "ingresoCentroMedico": true,
-        "diasConSintomas": {
-            "unoTres": {
-                "valorPeligro": 0
-            },
-            "cuatroDiez": {
-                "valorPeligro": 0
-            },
-            "onceDieciocho": {
-                "valorPeligro": 0
-            },
-            "diecinueveMas": {
-                "valorPeligro": 0
+        ]
+    },
+    {
+        "0997565": [
+            {
+                "nombre": "\u00c1ngel",
+                "identidad": "0997565",
+                "edad": "20",
+                "sexo": "2",
+                "peso": "160",
+                "estatura": "177",
+                "enfermedadesBase": [],
+                "sintomas": [
+                    "congestion-nasal",
+                    "malestar-garganta"
+                ],
+                "ingresoCentroMedico": "0",
+                "tipoSangre": "1",
+                "ejercicio": "3",
+                "diasConSintomas": "1",
+                "probabilidadRecuperarse": null,
+                "fechaIngreso": "19-04-2021  18:38:46"
             }
-        }
+        ]
+    },
+    {
+        "123456678096": [
+            {
+                "nombre": "Hector Gutierrez",
+                "identidad": "123456678096",
+                "edad": "24",
+                "sexo": "1",
+                "peso": "180",
+                "estatura": "177",
+                "enfermedadesBase": [],
+                "sintomas": [],
+                "ingresoCentroMedico": "0",
+                "tipoSangre": "4",
+                "ejercicio": "1",
+                "diasConSintomas": "1",
+                "probabilidadRecuperarse": null,
+                "fechaIngreso": "19-04-2021  19:05:19"
+            }
+        ]
     }
 ]
