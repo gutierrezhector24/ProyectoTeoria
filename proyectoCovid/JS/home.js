@@ -1,5 +1,5 @@
-var rutaCovid = './Backend/API/Pacientes.php';
-var rutaNoCovid = './Backend/API/PacientesN.php';
+var rutaCovid = '../Backend/API/Pacientes.php';
+var rutaNoCovid = '../Backend/API/PacientesN.php';
 
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
@@ -345,7 +345,6 @@ function analizarOpcion(e){
 }
 
 function analizarOpcionSintomas(e){
-    console.log(e.target.value);
     let valorActualSintomas = e.target.value;
     if (valorActualSintomas == 1){
         mostrarModalSintomas();
@@ -353,8 +352,6 @@ function analizarOpcionSintomas(e){
 }
 
 function analizarOpcionNoCovid(e){
-    console.log("349");
-    console.log(e.target.value);
     let valorSINO = e.target.value;
     if(valorSINO == 1){
         mostrarModalEnfermedadesNoCovid();
@@ -362,8 +359,6 @@ function analizarOpcionNoCovid(e){
 }
 
 function analizarOpcionSintomasNoCovid(e){
-    console.log("357");
-    console.log(e.target.value);
     let valorActualSintomas = e.target.value;
     if (valorActualSintomas == 1){
         mostrarModalSintomasNoCovid();
@@ -517,13 +512,15 @@ function comprobarCheckSintomas(){
 }
 
 function guardarEnfermedadesBase(){
+    
     limpiarArregloEnfermedadesBase();
     $("#enf-base input[type=checkbox]:checked").each(function () {
         if (this.value != undefined)
             enfermedadesBase.push(this.value);
     });
     comprobarArregloEnfermedadesBase();
-    console.log(enfermedadesBase);
+    
+    // console.log(enfermedadesBase);
 }
 
 function guardarSintomas(){
@@ -533,7 +530,7 @@ function guardarSintomas(){
             sintomas.push(this.value);
     });
     comprobarArregloSintomas();
-    console.log(sintomas);
+    // console.log(sintomas);
 }
 
 function comprobarArregloEnfermedadesBase(){
@@ -617,17 +614,76 @@ var covidBarras;
 var covidCircular;
 
 function simularCovid(){
+    if(covid == 1){
+        validarCovid();
+    }else{
+        validarCovidNo();
+    }
+
    //mandar parametros de validacion de formulario
-   let tipoCovid = selectorM.value;
-   let datosCovid = {};
-   ocultarCovid();
-   if(tipoCovid == 1){
-       datosCovid = obtenerDatosCovid();
-       enviarDatos(datosCovid);
-        // graficarCovidBarras(tipoCovid, datosCovid);
-   }else{
-    //   graficarCovidCircular(tipoCovid, datosCovid);
-   }
+//    let tipoCovid = selectorM.value;
+//    let datosCovid = {};
+//    ocultarCovid();
+//    if(tipoCovid == 1){
+//        datosCovid = obtenerDatosCovid();
+//        enviarDatos(datosCovid);
+//         graficarCovidBarras(tipoCovid, datosCovid);
+//    }else{
+//         graficarCovidCircular(tipoCovid, datosCovid);
+//    }
+}
+
+function validarCovid(){
+    if(
+        document.getElementById('nombre').value == '' ||
+        document.getElementById('identidad').value == '' ||
+        document.getElementById('edad').value == '' ||
+        document.getElementById('sexo').value == 0 ||
+        document.getElementById('peso').value == '' ||
+        document.getElementById('estatura').value == '' ||
+        document.getElementById('peso').value == '' ||
+        document.getElementById('estatura').value == '' ||
+        document.getElementById('ingreso').value == 2 ||
+        document.getElementById('enfermedades-base').value == 2 ||
+        document.getElementById('s-sintomas').value == 2 ||
+        document.getElementById('tipo-sangre').value == '' ||
+        document.getElementById('ejercicio').value == '' ||
+        document.getElementById('dias-con-sintomas').value == 0
+    ){
+        alert("Por favor llene todos los campos");
+        return false;
+    }else{
+        let datosCovid = obtenerDatosCovid();
+        ingresarUsuario(datosCovid);
+    }
+}
+
+function ingresarUsuario(datosCovid){
+    axios({
+        method: 'POST',
+        url: rutaCovid,
+        responseType: 'json',
+        data: datosCovid
+    }).then(res => {
+        if(res.data.estado){
+            console.log("Usuario registrado");
+            reiniciarFormulario();
+        }else{
+            alert("Usuario ya registrado");
+            return false;
+        }
+    }).catch(err => {
+        alert(`Hubo un error con el servidor, intente más tarde (${err})`);
+        return false;
+    });
+}
+
+function reiniciarFormulario(){
+    if(covid == 1){
+        document.getElementById('covid').reset();
+    }else{
+        document.getElementById('no-covid').reset();
+    }
 }
 
 function obtenerDatosCovid(){
@@ -637,6 +693,7 @@ function obtenerDatosCovid(){
         edad: document.getElementById('edad').value,
         sexo: document.getElementById('sexo').value,
         peso: document.getElementById('peso').value,
+        estatura: document.getElementById('estatura').value,
         enfermedadesBase: enfermedadesBase,
         sintomas: sintomas,
         ingresoCentroMedico: document.getElementById('ingreso').value,
@@ -649,11 +706,12 @@ function obtenerDatosCovid(){
 
 function obtenerDatosNoCovid(){
     return {
-        nombre: document.getElementById('nombre').value,
-        identidad: document.getElementById('identidad').value,
-        edad: document.getElementById('edad').value,
-        sexo: document.getElementById('sexo').value,
-        peso: document.getElementById('peso').value,
+        nombre: document.getElementById('nombre-n').value,
+        identidad: document.getElementById('identidad-n').value,
+        edad: document.getElementById('edad-n').value,
+        sexo: document.getElementById('sexo-n').value,
+        peso: document.getElementById('peso-n').value,
+        estatura: document.getElementById('estatura-n').value,
         sintomas: sintomas,
         enfermedadesBase: enfermedadesBase,
         frecuenciaLavado: document.getElementById('lavado-manos').value,
@@ -908,3 +966,16 @@ function simular(){
         simularNoCovid();
     }
 }
+
+function aKilogramos(peso){
+    return peso/2.2;
+}
+
+function aMetros(altura){
+    return altura/100;
+}
+
+function calcularIMC(peso, altura){
+    return aKilogramos(peso)/Math.pow(aMetros(altura), 2);
+}
+
