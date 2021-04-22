@@ -289,20 +289,6 @@ class Paciente
 
         public function verificarPaciente()
         {
-                // $existePaciente = false;
-
-                //     $contenidoArchivoPacientes = $this->getPaciente();
-                //     $pacientes = json_decode($contenidoArchivoPacientes, true);
-
-                //         for($cID = 0; $cID < sizeof($pacientes); $cID++){
-                //                 if($this->identidad == $pacientes[$cID][$this->identidad]){
-                //                         $existePaciente = true;
-                //                 break;
-                //                 }
-                //         }
-                // if (self::getUnPaciente($this->identidad)) {
-                //         $existePaciente = true;
-                // }
 
                 if (self::getUnPaciente($this->identidad) == false) {
                         $this->guardarPaciente();
@@ -331,7 +317,6 @@ class Paciente
                                         "tipoSangre" => $this->tipoSangre,
                                         "ejercicio" => $this->ejercicio,
                                         "diasConSintomas" => $this->diasConSintomas,
-                                        "probabilidadRecuperarse" => $this->probabilidadRecuperarse,
                                         "fechaIngreso" => date("d") . "-" . date("m") . "-" . date("Y") . "  " . date("H") . ":" . date("i") . ":" . date("s")
                                 )
                         ]

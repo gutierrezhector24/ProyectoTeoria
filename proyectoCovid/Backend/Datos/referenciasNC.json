@@ -1,0 +1,152 @@
+{
+"enfermedadesBase": {
+        "hipertension": {
+           "valorPeligro": 8
+        },
+        "diabetes": {
+            "valorPeligro": 8
+        },
+        "cancer": {
+            "valorPeligro": 8
+        },
+        "enfermedadesPulmonares": {
+            "valorPeligro": 7
+        }
+    },
+    "sintomas": {
+        "congestionNasal": {
+            "valorPeligro": 1
+        },
+        "malestarGarganta": {
+            "valorPeligro": 4
+        },
+        "dolorCorporal": {
+            "valorPeligro": 4
+        },
+        "dolorOjos": {
+            "valorPeligro": 2
+        },
+        "dolorCabeza": {
+            "valorPeligro": 3
+        },
+        "vomito": {
+            "valorPeligro": 6
+        },
+        "diarrea": {
+            "valorPeligro": 6
+        },
+        "decaimiento": {
+            "valorPeligro": 1
+        },
+        "fiebre": {
+            "valorPeligro": 8
+        },
+        "perdidaGustoOlfato": {
+            "valorPeligro": 9
+        },
+        "opresionPecho": {
+            "valorPeligro": 6
+        },
+        "cansancio": {
+            "valorPeligro": 4
+        },
+        "sudoracion": {
+            "valorPeligro": 1
+        }
+    },
+    "edad": {
+        "ceroVeinte": {
+            "valorPeligro": 1
+        },
+        "veintiunoCuarenta": {
+            "valorPeligro": 8
+        },
+        "cuarentayunoSesenta": {
+            "valorPeligro": 5
+        },
+        "sesentaMas": {
+            "valorPeligro": 6
+        }
+    },
+    "sexo": {
+        "masculino": {
+            "valorPeligro": 2
+        },
+        "femenino": {
+            "valorPeligro": 1
+        }
+    },
+    "frecuenciaLavado": {
+        "nunca": {
+            "valorPeligro": 9
+        },
+        "poco": {
+            "valorPeligro": 7
+        },
+        "frecuentemente": {
+            "valorPeligro": 2
+        }
+
+    },
+    "usoTipoDesinfectante": {
+        "cloro": {
+            "valorPeligro": -4
+        },
+        "amonio": {
+            "valorPeligro": -3
+        },
+        "alcoholSetentaPorciento": {
+            "valorPeligro": -6
+        },
+        "alcoholNoventayseisPorciento": {
+            "valorPeligro": -2
+        }
+
+    },
+    "usoMascarilla": {
+        "nunca": {
+            "valorPeligro": 9
+        },
+        "poco": {
+            "valorPeligro": 7
+        },
+        "frecuentemente": {
+            "valorPeligro": 1
+        }
+    },
+    "cantidadGenteEnLugares": {
+        "menosCincuenta": {
+            "valorPeligro": 2
+        },
+        "cincuentayunoCientoCincuenta": {
+            "valorPeligro": 5
+        },
+        "cientoCicuentayUnoMas": {
+            "valorPeligro": 9
+        }
+    },
+    "ejercicio": {
+        "poco": {
+            "valorPeligro": -3
+        },
+        "intermedio": {
+            "valorPeligro": -5
+        },
+        "mucho": {
+            "valorPeligro": -7
+        }
+
+    },
+
+    "visitaATriajesHospitales": {
+        "poco": {
+            "valorPeligro": 2
+        },
+        "medio": {
+            "valorPeligro": 7
+        },
+        "frecuentemente": {
+            "valorPeligro": 10
+        }
+    }
+}

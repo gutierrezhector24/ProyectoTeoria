@@ -1,0 +1,84 @@
+[
+    {
+        "123": [
+            {
+                "nombre": "Angel",
+                "identidad": "123",
+                "peso": "200",
+                "estatura": "188",
+                "edad": "21",
+                "tipoSangre": "B-",
+                "sexo": "Masculino",
+                "enfermedadesBase": [
+                    "Diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal"
+                ],
+                "frecuenciaLavadoManos": "2",
+                "ingresoCentroMedico": true,
+                "cantidadPersonas": "3",
+                "usoMascarilla": "2",
+                "desinfectante": "3",
+                "ejercicio": "2",
+                "diasConSintomas": "3",
+                "fechaIngreso": "21-04-2021  17:23:06"
+            }
+        ]
+    },
+    {
+        "1234567": [
+            {
+                "nombre": "Angel",
+                "identidad": "1234567",
+                "peso": "200",
+                "estatura": "188",
+                "edad": "21",
+                "tipoSangre": "B-",
+                "sexo": "Masculino",
+                "enfermedadesBase": [
+                    "Diabetes"
+                ],
+                "sintomas": [
+                    "congestionNasal"
+                ],
+                "frecuenciaLavadoManos": "2",
+                "ingresoCentroMedico": true,
+                "cantidadPersonas": "3",
+                "usoMascarilla": "2",
+                "desinfectante": "3",
+                "ejercicio": "2",
+                "diasConSintomas": "3",
+                "fechaIngreso": "21-04-2021  17:23:30"
+            }
+        ]
+    },
+    {
+        "123123128931": [
+            {
+                "nombre": "Hector Isidro",
+                "identidad": "123123128931",
+                "peso": "300",
+                "estatura": "201",
+                "edad": "49",
+                "tipoSangre": "3",
+                "sexo": "1",
+                "enfermedadesBase": [],
+                "sintomas": [
+                    "tos",
+                    "congestion-nasal",
+                    "malestar-garganta",
+                    "dolor-corporal"
+                ],
+                "frecuenciaLavadoManos": "2",
+                "ingresoCentroMedico": "0",
+                "cantidadPersonas": "1",
+                "usoMascarilla": "2",
+                "desinfectante": "3",
+                "ejercicio": "1",
+                "diasConSintomas": "2",
+                "fechaIngreso": "21-04-2021  17:55:43"
+            }
+        ]
+    }
+]
