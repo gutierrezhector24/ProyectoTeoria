@@ -1,5 +1,5 @@
 var rutaCovid = '../Backend/API/Pacientes.php';
-var rutaNoCovid = '../Backend/API/PacientesN.php';
+var rutaNoCovid = '../Backend/API/PacientesNC.php';
 
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
@@ -7,312 +7,14 @@ var selectEnfermedades2 = document.getElementById("enfermedades-base-n");
 var selectSintomas = document.getElementById("s-sintomas");
 var selectSintomas2 = document.getElementById("s-sintomas-n");
 var covid;
+var tipoPaciente;
 
 selectPrincipal.value = 0;
 var enfermedadesBase = [];
 var sintomas = [];
 var enfermedadesBaseNoCovid = [];
 var sintomasNoCovid = [];
-var jsonValoresCOVID = {
-    enfermedadesBase: {
-        hipertension: {
-            valorPeligro: 9
-        },
-        diabetes: {
-            valorPeligro: 9
-        },
-        cancer: {
-            valorPeligro: 9
-        },
-        enfermedadesPulmonares: {
-            valorPeligro: 8
-        }
-    },
-    sintomas: {
-        congestionNasal: {
-            valorPeligro: 2
-        },
-        malestarGarganta: {
-            valorPeligro: 5
-        },
-        dolorCorporal: {
-            valorPeligro: 5
-        },
-        dolorOjos: {
-            valorPeligro: 3
-        },
-        dolorCabeza: {
-            valorPeligro: 4
-        },
-        vomito: {
-            valorPeligro: 7
-        },
-        diarrea: {
-            valorPeligro: 7
-        },
-        decaimiento: {
-            valorPeligro: 2
-        },
-        fiebre: {
-            valorPeligro: 9
-        },
-        perdidaGustoOlfato: {
-            valorPeligro: 10
-        },
-        opresionPecho: {
-            valorPeligro: 7
-        },
-        cansancio: {
-            valorPeligro: 5
-        },
-        sudoracion: {
-            valorPeligro: 2
-        }
-    },
 
-    edad: {
-        ceroVeinte: {
-            valorPeligro: 2
-        },
-        veintiunoCuarenta: {
-            valorPeligro: 9
-        },
-        cuarentayunoSesenta: {
-            valorPeligro: 6
-        },
-        sesentaMas: {
-            valorPeligro: 7
-        }
-    },
-    sexo: {
-        masculino: {
-            valorPeligro: 3
-        },
-        femenino: {
-            valorPeligro: 1
-        }
-    },
-    IMC: {
-        dieciochopuntocincoVeinticuatropuntonueve: {
-            valorPeligro: 4
-        },
-        veinticincoVeintinuevepuntonueve: {
-            valorPeligro: 6
-        },
-        trientaTreintaycuatropuntonueve: {
-            valorPeligro: 7
-        },
-        treintaycincoTreintaynuevepuntonueve: {
-            valorPeligro: 8
-        },
-        cuarentaMas: {
-            valorPeligro: 10
-        }
-
-    },
-    ingresoCentroMedico: {
-        unoasietedias: {
-            valorPeligro: 9
-        },
-        unoacatorcedias: {
-            valorPeligro: 7
-        },
-        unoaveintiundias: {
-            valorPeligro: 10
-        }
-
-    },
-    ejercicio: {
-        poco: {
-            valorPeligro: 0
-        },
-        intermedio: {
-            valorPeligro: 0
-        },
-        mucho: {
-            valorPeligro: 0
-        }
-
-    },
-    visitaATribalesHospitales: {
-        poco: {
-            valorPeligro: 4
-        },
-        medio: {
-            valorPeligro: 6
-        },
-        frecuentemente: {
-            valorPeligro: 9
-        }
-
-    },
-
-    diasConSintomas: {
-        unoTres: {
-            valorPeligro: 0
-        },
-        cuatroDiez: {
-            valorPeligro: 0
-        },
-        onceDieciocho: {
-            valorPeligro: 0
-        },
-        diecinueveMas: {
-            valorPeligro: 0
-        }
-    }
-}
-
-var jsonValoresNOCOVID = {
-    enfermedadesBase: {
-        hipertension: {
-            valorPeligro: 8
-        },
-        diabetes: {
-            valorPeligro: 8
-        },
-        cancer: {
-            valorPeligro: 8
-        },
-        enfermedadesPulmonares: {
-            valorPeligro: 7
-        }
-    },
-    sintomas: {
-        congestionNasal: {
-            valorPeligro: 1
-        },
-        malestarGarganta: {
-            valorPeligro: 4
-        },
-        dolorCorporal: {
-            valorPeligro: 4
-        },
-        dolorOjos: {
-            valorPeligro: 2
-        },
-        dolorCabeza: {
-            valorPeligro: 3
-        },
-        vomito: {
-            valorPeligro: 6
-        },
-        diarrea: {
-            valorPeligro: 6
-        },
-        decaimiento: {
-            valorPeligro: 1
-        },
-        fiebre: {
-            valorPeligro: 8
-        },
-        perdidaGustoOlfato: {
-            valorPeligro: 9
-        },
-        opresionPecho: {
-            valorPeligro: 6
-        },
-        cansancio: {
-            valorPeligro: 4
-        },
-        sudoracion: {
-            valorPeligro: 1
-        }
-    },
-    edad: {
-        ceroVeinte: {
-            valorPeligro: 1
-        },
-        veintiunoCuarenta: {
-            valorPeligro: 8
-        },
-        cuarentayunoSesenta: {
-            valorPeligro: 5
-        },
-        sesentaMas: {
-            valorPeligro: 6
-        }
-    },
-    sexo: {
-        masculino: {
-            valorPeligro: 2
-        },
-        femenino: {
-            valorPeligro: 0
-        }
-    },
-    frecuenciaLavado: {
-        nunca: {
-            valorPeligro: 9
-        },
-        poco: {
-            valorPeligro: 7
-        },
-        frecuentemente: {
-            valorPeligro: 2
-        }
-
-    },
-    usoTipoDesinfectante: {
-        cloro: {
-            valorPeligro: -4
-        },
-        amonio: {
-            valorPeligro: -3
-        },
-        alcoholSetentaPorciento: {
-            valorPeligro: -6
-        },
-        alcoholNoventayseisPorciento: {
-            valorPeligro: -2
-        }
-
-    },
-    usoMascarilla: {
-        nunca: {
-            valorPeligro: 9
-        },
-        poco: {
-            valorPeligro: 7
-        },
-        frecuentemente: 1
-    },
-    cantidadGenteEnLugares: {
-        menosCincuenta: {
-            valorPeligro: 2
-        },
-        cincuentayunoCientoCincuenta: {
-            valorPeligro: 5
-        },
-        cientoCicuentayUnoMas: {
-            valorPeligro: 9
-        }
-    },
-    ejercicio: {
-        poco: {
-            valorPeligro: 0
-        },
-        intermedio: {
-            valorPeligro: 0
-        },
-        mucho: {
-            valorPeligro: 0
-        }
-
-    },
-
-    visitaATribalesHospitales: {
-        poco: {
-            valorPeligro: 2
-        },
-        medio: {
-            valorPeligro: 7
-        },
-        frecuentemente: {
-            valorPeligro: 10
-        }
-    }
-}
 
 selectPrincipal.addEventListener('change', actualizar);
 selectEnfermedades.addEventListener('change', analizarOpcion);
@@ -332,8 +34,12 @@ function actualizar(e){
     }else if(valorActualSelect == 2){
         covid = 0;
         mostrarNoCovid();
-    }else{
-        mostrarError();
+    }else if(valorActualSelect == 3){
+        covid = 3;
+        mostrarModalMultiUso("¡Bienvenido/a!", "¡Felicidades por estar pendiente de su mejora!");
+    }
+    else{
+        mostrarAlert("Error desconocido, intente nuevamente");
     }
 }
 
@@ -619,18 +325,6 @@ function simularCovid(){
     }else{
         validarCovidNo();
     }
-
-   //mandar parametros de validacion de formulario
-//    let tipoCovid = selectorM.value;
-//    let datosCovid = {};
-//    ocultarCovid();
-//    if(tipoCovid == 1){
-//        datosCovid = obtenerDatosCovid();
-//        enviarDatos(datosCovid);
-//         graficarCovidBarras(tipoCovid, datosCovid);
-//    }else{
-//         graficarCovidCircular(tipoCovid, datosCovid);
-//    }
 }
 
 function validarCovid(){
@@ -640,9 +334,8 @@ function validarCovid(){
         document.getElementById('edad').value == '' ||
         document.getElementById('sexo').value == 0 ||
         document.getElementById('peso').value == '' ||
-        document.getElementById('estatura').value == '' ||
+        document.getElementById('altura').value == '' ||
         document.getElementById('peso').value == '' ||
-        document.getElementById('estatura').value == '' ||
         document.getElementById('ingreso').value == 2 ||
         document.getElementById('enfermedades-base').value == 2 ||
         document.getElementById('s-sintomas').value == 2 ||
@@ -650,33 +343,117 @@ function validarCovid(){
         document.getElementById('ejercicio').value == '' ||
         document.getElementById('dias-con-sintomas').value == 0
     ){
-        alert("Por favor llene todos los campos");
-        return false;
+        mostrarAlert('Por favor llene todos los campos');
     }else{
         let datosCovid = obtenerDatosCovid();
-        ingresarUsuario(datosCovid);
+        ingresarUsuario(datosCovid, 'POST');
     }
 }
 
-function ingresarUsuario(datosCovid){
+function validarCovidNo(){
+    if(
+        document.getElementById('nombre-n').value == '' ||
+        document.getElementById('identidad-n').value == '' ||
+        document.getElementById('peso-n').value == '' ||
+        document.getElementById('estatura-n').value == '' ||
+        document.getElementById('edad-n').value == '' ||
+        document.getElementById('tipo-sangre-n').value == '' ||
+        document.getElementById('sexo-n').value == '' ||
+        document.getElementById('enfermedades-base-n').value == '' ||
+        document.getElementById('s-sintomas').value == '' ||
+        document.getElementById('lavado-manos').value == '' ||
+        document.getElementById('ingreso-n').value == '' ||
+        document.getElementById('cantidad-personas').value == '' ||
+        document.getElementById('uso-mascarilla').value == '' ||
+        document.getElementById('tipo-desinfectante').value == '' ||
+        document.getElementById('ejercicio-n').value == '' ||
+        document.getElementById('dias-con-sintomas-n').value == '' 
+    ){
+        mostrarAlert('Por favor llene todos los campos');
+    }else{
+        let datosNoCovid = obtenerDatosNoCovid();
+        ingresarUsuarioNoCovid(datosNoCovid, 'POST');
+    }
+}
+
+function mostrarAlert(texto){
+    alert(texto);
+    return false;
+}
+
+function ingresarUsuario(datosCovid = obtenerDatosCovid(), metodo){
     axios({
-        method: 'POST',
+        method: metodo,
         url: rutaCovid,
         responseType: 'json',
         data: datosCovid
     }).then(res => {
-        if(res.data.estado){
-            console.log("Usuario registrado");
+        if(res.data.estado == true){
+            metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
             reiniciarFormulario();
         }else{
-            alert("Usuario ya registrado");
-            return false;
+            mostrarModalMultiUso("Paciente COVID ya existe", "¿Desea actualizar sus registros?");
         }
     }).catch(err => {
-        alert(`Hubo un error con el servidor, intente más tarde (${err})`);
-        return false;
+        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
     });
 }
+
+function ingresarUsuarioNoCovid(datosNoCovid = obtenerDatosNoCovid(), metodo){
+    axios({
+        method: metodo,
+        url: rutaNoCovid,
+        responseType: 'json',
+        data: datosNoCovid
+    }).then(res => {
+        if(res.data.estado == true){
+            metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
+            reiniciarFormulario();
+        }else{
+            mostrarModalMultiUso("Paciente NO COVID ya existe", "¿Desea actualizar sus registros?");
+        }
+    }).catch(err => {
+        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
+    });
+}
+
+function mostrarModalMultiUso(titulo, cuerpo){
+    
+    document.getElementById('titulo-multi-uso').innerHTML = titulo;
+    document.getElementById('cuerpo-modal').innerHTML = cuerpo;
+    if(covid == 3){
+        document.getElementById("cualquier-cosa").innerHTML += `<input id="id-get" type="number" class="form-control" placeholder="Ingrese su identidad"><br>`;
+        document.getElementById("cualquier-cosa").innerHTML += `
+        <span>Seleccione el tipo de paciente</span>
+        <select class="form-control" name="tipo-paciente" id="tipo-paciente">
+            <option selected value="">Seleccione una opción</option>
+            <option value="1">Paciente COVID</option>
+            <option value="0">Paciente NO COVID</option>
+        </select>`;
+        document.getElementById("tipo-paciente").addEventListener('change', verificarTipo);
+    }
+    $('#modal-multi-uso').modal('show');
+}
+
+function cerrarModalMultiUso(){
+    document.getElementById("cualquier-cosa").innerHTML = '';
+    $('#modal-multi-uso').modal('hide');
+}
+
+
+
+function verificarTipo(e){
+    let valor = e.target.value;
+
+    if(valor == 1){
+        tipoPaciente = 1;
+    }else if(valor == 0){
+        tipoPaciente = 0;
+    }else{
+        tipoPaciente = 2;
+    }
+}
+
 
 function reiniciarFormulario(){
     if(covid == 1){
@@ -693,14 +470,13 @@ function obtenerDatosCovid(){
         edad: document.getElementById('edad').value,
         sexo: document.getElementById('sexo').value,
         peso: document.getElementById('peso').value,
-        estatura: document.getElementById('estatura').value,
+        estatura: document.getElementById('altura').value,
         enfermedadesBase: enfermedadesBase,
         sintomas: sintomas,
         ingresoCentroMedico: document.getElementById('ingreso').value,
         tipoSangre: document.getElementById('tipo-sangre').value,
         ejercicio: document.getElementById('ejercicio').value,
-        diasConSintomas: document.getElementById('dias-con-sintomas').value,
-        probabilidadRecuperarse: 0
+        diasConSintomas: document.getElementById('dias-con-sintomas').value
     }
 }
 
@@ -708,23 +484,52 @@ function obtenerDatosNoCovid(){
     return {
         nombre: document.getElementById('nombre-n').value,
         identidad: document.getElementById('identidad-n').value,
-        edad: document.getElementById('edad-n').value,
-        sexo: document.getElementById('sexo-n').value,
         peso: document.getElementById('peso-n').value,
         estatura: document.getElementById('estatura-n').value,
-        sintomas: sintomas,
+        edad: document.getElementById('edad-n').value,
+        tipoSangre: document.getElementById('tipo-sangre-n').value,
+        sexo: document.getElementById('sexo-n').value,
         enfermedadesBase: enfermedadesBase,
-        frecuenciaLavado: document.getElementById('lavado-manos').value,
+        sintomas: sintomas,
+        frecuenciaLavadoManos: document.getElementById('lavado-manos').value,
+        ingresoCentroMedico: document.getElementById('ingreso-n').value,
+        cantidadPersonas: document.getElementById('cantidad-personas').value,
         usoMascarilla: document.getElementById('uso-mascarilla').value,
-        cantidadGenteEnLugares: document.getElementById('cantidad-personas').value,
-        usoTipoDesinfectante: document.getElementById('tipo-desinfectante').value,
-        ejercicio: document.getElementById('ejercicio').value,
-        probabilidadCovid: 0
+        desinfectante: document.getElementById('tipo-desinfectante').value,
+        ejercicio: document.getElementById('ejercicio-n').value,
+        diasConSintomas: document.getElementById('dias-con-sintomas-n').value
     }
 }
 
-function enviarDatos(){
-    // Aquí va la función que envía los datos a PHP
+function obtenerPaciente(){
+    if(tipoPaciente > 1){
+        mostrarAlert("Seleccione un tipo de paciente");
+    }else{
+        axios({
+            method: 'GET',
+            url: obtenerRuta(),
+            responseType: 'json',
+            data: {
+                id: document.getElementById('id-get').value
+            }
+        }).then(res => {
+            if(res.data.estado == true){
+                console.log(res.data.paciente);
+            }else{
+                mostrarAlert("Usuario inexistente");
+            }
+        }).catch(err => {
+            mostrarAlert("Error desconocido");
+        });
+    }
+}
+
+function obtenerRuta(){
+    if(covid == 1){
+        return rutaCovid;
+    }else{
+        return rutaNoCovid;
+    }
 }
 
 function simularNoCovid(){
@@ -961,9 +766,11 @@ function actualizaN(e){
 
 function simular(){
     if(covid == 1){
-        simularCovid();
+        validarCovid();
+    }else if(covid == 2){
+        validarCovidNo();
     }else{
-        simularNoCovid();
+        mostrarAlert("Error desconocido");
     }
 }
 

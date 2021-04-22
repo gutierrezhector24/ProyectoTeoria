@@ -50,7 +50,7 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <span>Peso</span>
-                        <input id="peso-n" type="number" class="form-control" placeholder="Ingrese su peso (em libras)">
+                        <input id="peso-n" type="number" class="form-control" placeholder="Ingrese su peso (en libras)">
                     </div>
                     <div class="col-md-6">
                         <span>Estatura</span>
@@ -64,20 +64,9 @@
                         <input id="edad-n" type="number" class="form-control" placeholder="Ingrese su edad">
                     </div>
                     <div class="col-md-6">
-                        <span>Altura</span>
-                        <input id="altura-n" type="number" class="form-control" placeholder="Ingrese su altura en metros">
-                    </div> 
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <span>Peso</span>
-                        <input id="peso-n" type="number" class="form-control" placeholder="Ingrese su peso en libras">
-                    </div>
-                    <div class="col-md-6">
                         <span>Tipo de Sangre</span>
-                        <select name="tipo-sangre" id="tipo-sangre" class="form-control">
-                            <option value="0">Seleccione una</option>
+                        <select name="tipo-sangre-n" id="tipo-sangre-n" class="form-control">
+                            <option value="">Seleccione una</option>
                             <option value="1">A+</option>
                             <option value="2">A-</option>
                             <option value="3">B+</option>
@@ -102,7 +91,7 @@
                     <div class="col-md-6">
                         <span>Enfermedades base</span>
                         <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
-                            <option selected value="2">Seleccione una opción</option>
+                            <option selected value="">Seleccione una opción</option>
                             <option value="1">Sí</option>
                             <option value="0">No</option>
                         </select>
@@ -113,22 +102,11 @@
                     <div class="col-md-6">
                         <span>Síntomas</span>
                         <select class="form-control" name="s-sintomas-n" id="s-sintomas-n">
-                            <option selected value="2">Seleccione una opción</option>
+                            <option selected value="">Seleccione una opción</option>
                             <option value="1">Sí</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <span>Ingreso en algún centro médico</span>
-                        <select class="form-control" name="ingreso-n" id="ingreso-n">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <div class="col-md-6">
                         <span>Frecuencia del lavado de manos</span>
                         <select class="form-control" name="lavado-manos" id="lavado-manos">
@@ -138,19 +116,17 @@
                             <option value="3">Frecuentemente</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <span>Uso de mascarilla</span>
-                        <select class="form-control" name="uso-mascarilla" id="uso-mascarilla">
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">Nunca</option>
-                            <option value="2">Poco</option>
-                            <option value="3">Frecuentemente</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ingreso en algún centro médico</span>
+                        <select class="form-control" name="ingreso-n" id="ingreso-n">
+                            <option selected value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <span>Cantidad de personas en lugares donde visita</span>
                         <select class="form-control" name="cantidad-personas" id="cantidad-personas">
@@ -160,7 +136,18 @@
                             <option value="3">Mas de 151</option>
                         </select>
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Uso de mascarilla</span>
+                        <select class="form-control" name="uso-mascarilla" id="uso-mascarilla">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Nunca</option>
+                            <option value="2">Poco</option>
+                            <option value="3">Frecuentemente</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <span>Tipo de desinfectante que utiliza</span>
                         <select class="form-control" name="tipo-desinfectante" id="tipo-desinfectante">
@@ -169,6 +156,28 @@
                             <option value="2">Amonio</option>
                             <option value="3">Alcohol al 70%</option>
                             <option value="3">Alcohol al 96%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ejercicio</span>
+                        <select class="form-control" name="ejercicio-n" id="ejercicio-n">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Poco</option>
+                            <option value="2">Intermedio</option>
+                            <option value="3">Mucho</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Días con síntomas</span>
+                        <select class="form-control" name="dias-con-sintomas-n" id="dias-con-sintomas-n">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">1-3</option>
+                            <option value="2">4-10</option>
+                            <option value="3">11-18</option>
+                            <option value="4">19+</option>
                         </select>
                     </div>
                 </div>
@@ -471,6 +480,28 @@
             </div>
         </div>
         <!-- FIN MODAL SÍNTOMAS -->
+
+        <!-- MODAL MULTI-USOS -->
+        <div id="modal-multi-uso" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 id="titulo-multi-uso" class="modal-title"></h5>
+                  <button onclick="cerrarModalMultiUso()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div id="cualquier-cosa" class="modal-body">
+                  <p id="cuerpo-modal"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary" onclick="obtenerPaciente()">Sí</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- FIN MODAL MULTI-USOS -->
 
 
 

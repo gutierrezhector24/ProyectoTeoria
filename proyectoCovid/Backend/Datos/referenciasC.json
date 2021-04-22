@@ -1,0 +1,149 @@
+{
+"enfermedadesBase": {
+        "hipertension": {
+            "valorPeligro": 9
+        },
+        "diabetes": {
+            "valorPeligro": 9
+        },
+        "cancer": {
+            "valorPeligro": 9
+        },
+        "enfermedadesPulmonares": {
+            "valorPeligro": 8
+        }
+    },
+    "sintomas": {
+        "congestionNasal": {
+            "valorPeligro": 2
+        },
+        "malestarGarganta": {
+            "valorPeligro": 5
+        },
+        "dolorCorporal": {
+            "valorPeligro": 5
+        },
+        "dolorOjos": {
+            "valorPeligro": 3
+        },
+        "dolorCabeza": {
+            "valorPeligro": 4
+        },
+        "vomito": {
+            "valorPeligro": 7
+        },
+        "diarrea": {
+            "valorPeligro": 7
+        },
+        "decaimiento": {
+            "valorPeligro": 2
+        },
+        "fiebre": {
+            "valorPeligro": 9
+        },
+        "perdidaGustoOlfato": {
+            "valorPeligro": 10
+        },
+        "opresionPecho": {
+            "valorPeligro": 7
+        },
+        "cansancio": {
+            "valorPeligro": 5
+        },
+        "sudoracion": {
+            "valorPeligro": 2
+        }
+    },
+
+    "edad": {
+        "ceroVeinte": {
+            "valorPeligro": 2
+        },
+        "veintiunoCuarenta": {
+            "valorPeligro": 9
+        },
+        "cuarentayunoSesenta": {
+            "valorPeligro": 6
+        },
+        "sesentaMas": {
+            "valorPeligro": 7
+        }
+    },
+    "sexo": {
+        "masculino": {
+            "valorPeligro": 3
+        },
+        "femenino": {
+            "valorPeligro": 1
+        }
+    },
+    "IMC": {
+        "dieciochopuntocincoVeinticuatropuntonueve": {
+            "valorPeligro": 4
+        },
+        "veinticincoVeintinuevepuntonueve": {
+            "valorPeligro": 6
+        },
+        "trientaTreintaycuatropuntonueve": {
+            "valorPeligro": 7
+        },
+        "treintaycincoTreintaynuevepuntonueve": {
+            "valorPeligro": 8
+        },
+        "cuarentaMas": {
+            "valorPeligro": 10
+        }
+
+    },
+    "ingresoCentroMedico": {
+        "unoasietedias": {
+            "valorPeligro": 9
+        },
+        "ochoacatorcedias": {
+            "valorPeligro": 7
+        },
+        "quinceaveintiundias": {
+            "valorPeligro": 10
+        }
+
+    },
+    "ejercicio": {
+        "poco": {
+            "valorPeligro": -2
+        },
+        "intermedio": {
+            "valorPeligro": -4
+        },
+        "mucho": {
+            "valorPeligro": -6
+        }
+
+    },
+    "visitaATriajesHospitales": {
+        "poco": {
+            "valorPeligro": 4
+        },
+        "medio": {
+            "valorPeligro": 6
+        },
+        "frecuentemente": {
+            "valorPeligro": 9
+        }
+
+    },
+
+    "diasConSintomas": {
+        "unoTres": {
+            "valorPeligro": 1
+        },
+        "cuatroDiez": {
+            "valorPeligro": 3
+        },
+        "onceDieciocho": {
+            "valorPeligro": 5
+        },
+        "diecinueveMas": {
+            "valorPeligro": 8
+        }
+    }
+}
