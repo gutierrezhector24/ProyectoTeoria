@@ -52,7 +52,10 @@ session_start();
                         "estado" => true,
                         "paciente" => $paciente
                     ));
+                    $_SESSION["token"] = sha1(uniqid(rand(), true));
                     setcookie("id", $paciente['identidad'], time()+(60*60*24*31), "/");
+                    setcookie("token", $_SESSION["token"], time()+(60*60*24*31), "/");
+                    setcookie("covid", "0", time()+(60*60*24*31), "/");
                 }
             }
         break;

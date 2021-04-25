@@ -1,27 +1,28 @@
 [
     {
-        "123212345": [
+        "123456": [
             {
-                "nombre": "Jonh Connor 5",
-                "identidad": "123212345",
-                "edad": "25",
-                "sexo": "Masculino",
-                "peso": "158",
+                "nombre": "Hector",
+                "identidad": "123456",
+                "edad": "24",
+                "sexo": "1",
+                "peso": "200",
                 "estatura": "178",
                 "enfermedadesBase": [
                     "hipertension",
                     "diabetes"
                 ],
                 "sintomas": [
-                    "congestionNasal",
-                    "cansancio",
-                    "opresionPecho"
+                    "diarrea",
+                    "decaimiento",
+                    "fiebre",
+                    "perdida-gusto-olfato"
                 ],
-                "ingresoCentroMedico": true,
-                "tipoSangre": "A+",
-                "ejercicio": "Poco",
-                "diasConSintomas": "9",
-                "fechaIngreso": "21-04-2021  17:24:25"
+                "ingresoCentroMedico": "0",
+                "tipoSangre": "1",
+                "ejercicio": "2",
+                "diasConSintomas": "2",
+                "fechaIngreso": "24-04-2021  18:09:16"
             }
         ]
     }

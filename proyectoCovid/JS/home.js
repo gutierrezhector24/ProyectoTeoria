@@ -528,14 +528,13 @@ function obtenerPaciente(identificador){
     }).then(res => {
         console.log(res.data);
         if(res.data.estado == true){
-            console.log(res.data.paciente);
+            location.href = 'history.php';
         }else{
             mostrarAlert("Usuario inexistente");
         }
     }).catch(err => {
         mostrarAlert(`Error (${err})`);
-    });
-    
+    }); 
 }
 
 function leerCookie(identificador) {
