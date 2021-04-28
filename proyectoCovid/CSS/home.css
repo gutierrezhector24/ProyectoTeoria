@@ -4,6 +4,14 @@ body{
     background-attachment: inherit;
 }
 
+.imag{
+    background-size: cover;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCXYTQQHicA3JEJOXrpkrDWtlVa-4Kp-xcsg&usqp=CAU");
+    /*background-image: url('../HTML/img/image-error.png');
+    */width: 100%;
+    height: 200px;
+}
+
 .form{
     border: solid 0;
     align-items: center;
