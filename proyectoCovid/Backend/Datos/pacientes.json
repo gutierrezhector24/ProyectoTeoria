@@ -1,1 +1,30 @@
-[{"123212345":[{"nombre":"Jonh Connor 5","identidad":"123212345","edad":"25","sexo":"Masculino","peso":"158","estatura":"178","enfermedadesBase":["hipertension","diabetes"],"sintomas":["congestionNasal","cansancio","opresionPecho"],"ingresoCentroMedico":true,"tipoSangre":"A+","ejercicio":"Poco","diasConSintomas":"9","fechaIngreso":"21-04-2021  17:24:25"}]},{"006900690069":[{"nombre":"Angela Alvares Golosa","identidad":"006900690069","edad":"21","sexo":"1","peso":"170","estatura":"1.77","enfermedadesBase":["hipertension","diabetes","enfermedades-pulmonares"],"sintomas":["tos","malestar-garganta","dolor-ojos","dolor-cabeza","diarrea"],"ingresoCentroMedico":"1","tipoSangre":"2","ejercicio":"1","diasConSintomas":"2","fechaIngreso":"21-04-2021  21:39:01"}]},{"0825199600209":[{"nombre":"Hector Gutierrez","identidad":"0825199600209","edad":"24","sexo":"2","peso":"192","estatura":"1.78","enfermedadesBase":[],"sintomas":["tos","congestion-nasal","decaimiento"],"ingresoCentroMedico":"0","tipoSangre":"1","ejercicio":"2","diasConSintomas":"1","fechaIngreso":"28-04-2021  10:18:41"}]}]
+[
+    {
+        "123456": [
+            {
+                "nombre": "Hector",
+                "identidad": "123456",
+                "edad": "24",
+                "sexo": "1",
+                "peso": "200",
+                "estatura": "178",
+                "enfermedadesBase": [
+                    "hipertension",
+                    "diabetes"
+                ],
+                "sintomas": [
+                    "diarrea",
+                    "decaimiento",
+                    "fiebre",
+                    "perdida-gusto-olfato"
+                ],
+                "ingresoCentroMedico": "0",
+                "tipoSangre": "1",
+                "ejercicio": "2",
+                "diasConSintomas": "2",
+                "fechaIngreso": "24-04-2021  18:09:16"
+            }
+        ]
+    }
+]
+

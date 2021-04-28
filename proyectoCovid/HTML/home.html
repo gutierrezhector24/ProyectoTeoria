@@ -93,7 +93,7 @@
                         <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
                             <option selected value="">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloEnfermedadesBase()" value="0">No</option>
                         </select>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                         <select class="form-control" name="s-sintomas-n" id="s-sintomas-n">
                             <option selected value="">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloSintomas()" value="0">No</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -155,7 +155,7 @@
                             <option value="1">Cloro</option>
                             <option value="2">Amonio</option>
                             <option value="3">Alcohol al 70%</option>
-                            <option value="3">Alcohol al 96%</option>
+                            <option value="4">Alcohol al 96%</option>
                         </select>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                         <select class="form-control" name="enfermedades-base" id="enfermedades-base">
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloEnfermedadesBase()" value="0">No</option>
                         </select>
                     </div>
                  </div>
@@ -266,7 +266,7 @@
                         <select class="form-control" name="s-sintomas" id="s-sintomas">
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloSintomas()" value="0">No</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -494,9 +494,15 @@
                 <div id="cualquier-cosa" class="modal-body">
                   <p id="cuerpo-modal"></p>
                 </div>
+
+               <!--
                 <div class="modal-footer">
                   <button id="btn-si" type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
                   <button id="btn-no" type="button" class="btn btn-primary" onclick="obtenerPaciente()">Sí</button>
+               -->
+                  
+                <div id="botones-modal-multi-uso" class="modal-footer">
+                  
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ var selectEnfermedades2 = document.getElementById("enfermedades-base-n");
 var selectSintomas = document.getElementById("s-sintomas");
 var selectSintomas2 = document.getElementById("s-sintomas-n");
 var covid;
-var tipoPaciente;
+var tipoPaciente = 2;
 
 selectPrincipal.value = 0;
 var enfermedadesBase = [];
@@ -346,7 +346,7 @@ function validarCovid(){
         mostrarModalMultiUso("¡Campos vacios!", "Por favor llene todos los campos");//mostrarAlert('Por favor llene todos los campos');
     }else{
         let datosCovid = obtenerDatosCovid();
-        ingresarUsuario(datosCovid, 'POST');
+        ingresarUsuario('POST', datosCovid);
     }
 }
 
@@ -372,7 +372,7 @@ function validarCovidNo(){
         mostrarModalMultiUso("¡Campos vacios!", "Por favor llene todos los campos");//mostrarAlert('Por favor llene todos los campos');
     }else{
         let datosNoCovid = obtenerDatosNoCovid();
-        ingresarUsuarioNoCovid(datosNoCovid, 'POST');
+        ingresarUsuarioNoCovid('POST', datosNoCovid);
     }
 }
 
@@ -381,7 +381,8 @@ function mostrarAlert(texto){
     return false;
 }
 
-function ingresarUsuario(datosCovid = obtenerDatosCovid(), metodo){
+function ingresarUsuario(metodo, datosCovid){
+    datosCovid = datosCovid || obtenerDatosCovid();
     axios({
         method: metodo,
         url: rutaCovid,
@@ -399,7 +400,8 @@ function ingresarUsuario(datosCovid = obtenerDatosCovid(), metodo){
     });
 }
 
-function ingresarUsuarioNoCovid(datosNoCovid = obtenerDatosNoCovid(), metodo){
+function ingresarUsuarioNoCovid(metodo, datosNoCovid){
+    datosNoCovid = datosNoCovid || obtenerDatosNoCovid();
     axios({
         method: metodo,
         url: rutaNoCovid,
@@ -428,15 +430,32 @@ function mostrarModalMultiUso(titulo, cuerpo){
         document.getElementById("cualquier-cosa").innerHTML += `
         <span>Seleccione el tipo de paciente</span>
         <select class="form-control" name="tipo-paciente" id="tipo-paciente">
-            <option selected value="">Seleccione una opción</option>
+            <option selected value="2">Seleccione una opción</option>
             <option value="1">Paciente COVID</option>
             <option value="0">Paciente NO COVID</option>
         </select>`;
+        document.getElementById("botones-modal-multi-uso").innerHTML += `
+            <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" onclick="verificarPacienteTipo()">Ver historial</button>
+        `;
         document.getElementById("tipo-paciente").addEventListener('change', verificarTipo);
-    }else{
+      
+    /*}else{
         document.getElementById("btn-si").style.display = 'none';
         document.getElementById("btn-no").style.display = 'none';
         document.getElementById("cualquier-cosa").innerHTML += `<span style="heigth: 200px; background-image: url('../HTML/img/image-error.png');"></span>`;
+    */
+      
+    }else if(covid == 1){
+        document.getElementById("botones-modal-multi-uso").innerHTML += `
+            <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" onclick="ingresarUsuario('PUT')">Sí</button>
+        `;
+    }else{
+        document.getElementById("botones-modal-multi-uso").innerHTML += `
+            <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" onclick="ingresarUsuarioNoCovid('PUT')">Sí</button>
+        `;
     }
 
     $('#modal-multi-uso').modal('show');
@@ -444,6 +463,7 @@ function mostrarModalMultiUso(titulo, cuerpo){
 
 function cerrarModalMultiUso(){
     document.getElementById("cualquier-cosa").innerHTML = '';
+    document.getElementById("botones-modal-multi-uso").innerHTML = '';
     $('#modal-multi-uso').modal('hide');
 }
 
@@ -451,7 +471,7 @@ function cerrarModalMultiUso(){
 
 function verificarTipo(e){
     let valor = e.target.value;
-
+    console.log(valor);
     if(valor == 1){
         tipoPaciente = 1;
     }else if(valor == 0){
@@ -508,6 +528,7 @@ function obtenerDatosNoCovid(){
     }
 }
 
+/*
 function obtenerPaciente(){
     if(tipoPaciente > 1){
         mostrarAlert("Seleccione un tipo de paciente");
@@ -528,14 +549,57 @@ function obtenerPaciente(){
         }).catch(err => {
            mostrarAlert("Error desconocido");// mostrarModalMultiUso("¡Oppss!", "¡Ha ocurrido un error!");
         });
+     */
+
+function obtenerPaciente(identificador){
+    let ruta = obtenerRuta();
+    let id = leerCookie(identificador) || document.getElementById("id-get").value;
+    axios({
+        method: 'GET',
+        url: ruta + `=${id}`,
+        responseType: 'json'
+    }).then(res => {
+        console.log(res.data);
+        if(res.data.estado == true){
+            location.href = 'history.php';
+        }else{
+            mostrarAlert("Usuario inexistente");
+        }
+    }).catch(err => {
+        mostrarAlert(`Error (${err})`);
+    }); 
+}
+
+function leerCookie(identificador) {
+    let name = identificador + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return unescape(c.substring(name.length, c.length));
+
     }
+    return "";
 }
 
 function obtenerRuta(){
-    if(covid == 1){
-        return rutaCovid;
+    if(tipoPaciente == 1){
+        return rutaCovid + '?id';
     }else{
-        return rutaNoCovid;
+        return rutaNoCovid + '?id';
+    }
+}
+
+function verificarPacienteTipo(){
+    if(document.getElementById('id-get').value == ''){
+        mostrarAlert("Por favor llene los campos");
+    }else{
+        if(tipoPaciente > 1){
+            mostrarAlert("Seleccione el tipo de paciente");
+        }
+        else{
+            obtenerPaciente();
+        }
     }
 }
 
@@ -772,9 +836,14 @@ function actualizaN(e){
 }
 
 function simular(){
+    console.log(covid);
     if(covid == 1){
         validarCovid();
+    /*
     }else if(covid == 2){//aqui deberia de ser covid == porque arriba le diste ese valor
+   */
+    }else if(covid == 0){
+
         validarCovidNo();
     }else{
         mostrarModalMultiUso("¡Oppss!", "¡Ha ocurrido un error!");//mostrarAlert("Error desconocido");
