@@ -39,7 +39,7 @@ function actualizar(e){
         mostrarModalMultiUso("¡Bienvenido/a!", "¡Felicidades por estar pendiente de su mejora!");
     }
     else{
-        mostrarAlert("Error desconocido, intente nuevamente");
+        mostrarAlert("Error desconocido, intente nuevamente"); 
     }
 }
 
@@ -343,7 +343,7 @@ function validarCovid(){
         document.getElementById('ejercicio').value == '' ||
         document.getElementById('dias-con-sintomas').value == 0
     ){
-        mostrarAlert('Por favor llene todos los campos');
+        mostrarModalMultiUso("¡Campos vacios!", "Por favor llene todos los campos");//mostrarAlert('Por favor llene todos los campos');
     }else{
         let datosCovid = obtenerDatosCovid();
         ingresarUsuario('POST', datosCovid);
@@ -360,7 +360,7 @@ function validarCovidNo(){
         document.getElementById('tipo-sangre-n').value == '' ||
         document.getElementById('sexo-n').value == '' ||
         document.getElementById('enfermedades-base-n').value == '' ||
-        document.getElementById('s-sintomas').value == '' ||
+        document.getElementById('s-sintomas-n').value == '' ||
         document.getElementById('lavado-manos').value == '' ||
         document.getElementById('ingreso-n').value == '' ||
         document.getElementById('cantidad-personas').value == '' ||
@@ -369,7 +369,7 @@ function validarCovidNo(){
         document.getElementById('ejercicio-n').value == '' ||
         document.getElementById('dias-con-sintomas-n').value == '' 
     ){
-        mostrarAlert('Por favor llene todos los campos');
+        mostrarModalMultiUso("¡Campos vacios!", "Por favor llene todos los campos");//mostrarAlert('Por favor llene todos los campos');
     }else{
         let datosNoCovid = obtenerDatosNoCovid();
         ingresarUsuarioNoCovid('POST', datosNoCovid);
@@ -390,13 +390,13 @@ function ingresarUsuario(metodo, datosCovid){
         data: datosCovid
     }).then(res => {
         if(res.data.estado == true){
-            metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
+            metodo == 'POST' ?  mostrarModalMultiUso("¡Felicidades!", "¡Usuario registrado con exito!"): mostrarModalMultiUso("¡En buena hora!", "¡Usuario actualizado con exito!");//mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
             reiniciarFormulario();
         }else{
             mostrarModalMultiUso("Paciente COVID ya existe", "¿Desea actualizar sus registros?");
         }
     }).catch(err => {
-        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
+        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);//mostrarModalMultiUso("¡ha ocurrido un error con el servidor!", `intente más tarde (${err})`);
     });
 }
 
@@ -409,7 +409,7 @@ function ingresarUsuarioNoCovid(metodo, datosNoCovid){
         data: datosNoCovid
     }).then(res => {
         if(res.data.estado == true){
-            metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
+            metodo == 'POST' ? mostrarModalMultiUso("¡Felicidades!", "¡Usuario registrado con exito!"): mostrarModalMultiUso("¡En buena hora!", "¡Usuario actualizado con exito!");//mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
             reiniciarFormulario();
         }else{
             mostrarModalMultiUso("Paciente NO COVID ya existe", "¿Desea actualizar sus registros?");
@@ -424,6 +424,8 @@ function mostrarModalMultiUso(titulo, cuerpo){
     document.getElementById('titulo-multi-uso').innerHTML = titulo;
     document.getElementById('cuerpo-modal').innerHTML = cuerpo;
     if(covid == 3){
+        document.getElementById("btn-si").style.display = 'block';
+        document.getElementById("btn-no").style.display = 'block';
         document.getElementById("cualquier-cosa").innerHTML += `<input id="id-get" type="number" class="form-control" placeholder="Ingrese su identidad"><br>`;
         document.getElementById("cualquier-cosa").innerHTML += `
         <span>Seleccione el tipo de paciente</span>
@@ -437,6 +439,13 @@ function mostrarModalMultiUso(titulo, cuerpo){
             <button type="button" class="btn btn-primary" onclick="verificarPacienteTipo()">Ver historial</button>
         `;
         document.getElementById("tipo-paciente").addEventListener('change', verificarTipo);
+      
+    /*}else{
+        document.getElementById("btn-si").style.display = 'none';
+        document.getElementById("btn-no").style.display = 'none';
+        document.getElementById("cualquier-cosa").innerHTML += `<span style="heigth: 200px; background-image: url('../HTML/img/image-error.png');"></span>`;
+    */
+      
     }else if(covid == 1){
         document.getElementById("botones-modal-multi-uso").innerHTML += `
             <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
@@ -448,6 +457,7 @@ function mostrarModalMultiUso(titulo, cuerpo){
             <button type="button" class="btn btn-primary" onclick="ingresarUsuarioNoCovid('PUT')">Sí</button>
         `;
     }
+
     $('#modal-multi-uso').modal('show');
 }
 
@@ -518,6 +528,29 @@ function obtenerDatosNoCovid(){
     }
 }
 
+/*
+function obtenerPaciente(){
+    if(tipoPaciente > 1){
+        mostrarAlert("Seleccione un tipo de paciente");
+    }else{
+        axios({
+            method: 'GET',
+            url: obtenerRuta(),
+            responseType: 'json',
+            data: {
+                id: document.getElementById('id-get').value
+            }
+        }).then(res => {
+            if(res.data.estado == true){
+                console.log(res.data.paciente);
+            }else{
+                mostrarAlert("Usuario inexistente");//mostrarModalMultiUso("¡Oppss!", "¡Al parecer el usuario no existe!");
+            }
+        }).catch(err => {
+           mostrarAlert("Error desconocido");// mostrarModalMultiUso("¡Oppss!", "¡Ha ocurrido un error!");
+        });
+     */
+
 function obtenerPaciente(identificador){
     let ruta = obtenerRuta();
     let id = leerCookie(identificador) || document.getElementById("id-get").value;
@@ -544,6 +577,7 @@ function leerCookie(identificador) {
         let c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1);
         if (c.indexOf(name) == 0) return unescape(c.substring(name.length, c.length));
+
     }
     return "";
 }
@@ -805,10 +839,14 @@ function simular(){
     console.log(covid);
     if(covid == 1){
         validarCovid();
+    /*
+    }else if(covid == 2){//aqui deberia de ser covid == porque arriba le diste ese valor
+   */
     }else if(covid == 0){
+
         validarCovidNo();
     }else{
-        mostrarAlert("Error desconocido");
+        mostrarModalMultiUso("¡Oppss!", "¡Ha ocurrido un error!");//mostrarAlert("Error desconocido");
     }
 }
 
