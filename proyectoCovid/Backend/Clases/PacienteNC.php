@@ -444,6 +444,53 @@ class Paciente {
                 return $paciente;
         }
 
-}
+    public static function actualizarRegistros($identidad, $registros){
+        $pacientes = json_decode(self::getPaciente(), true);
+        $paciente1 = false;
+        $paciente = false;
 
-?>
+        for ($cPacientes = 0; $cPacientes < sizeof($pacientes); $cPacientes++) {
+            error_reporting(0);
+            if ($pacientes[$cPacientes][$identidad]) {
+                $paciente1 = $pacientes[$cPacientes][$identidad];
+                    $pacientes[$cPacientes][$identidad][] = array(
+                        "nombre" => $pacientes[$cPacientes][$identidad][0]["nombre"],
+                        "identidad" => $pacientes[$cPacientes][$identidad][0]["identidad"],
+                        "peso" => $registros["peso"],
+                        "estatura" => $registros["estatura"],
+                        "edad" => $registros["edad"],
+                        "tipoSangre" => $pacientes[$cPacientes][$identidad][0]["tipoSangre"],
+                        "sexo" => $pacientes[$cPacientes][$identidad][0]["sexo"],
+                        "enfermedadesBase" => $registros["enfermedadesBase"],
+                        "sintomas" => $registros["sintomas"],
+                        "frecuenciaLavadoManos" => $registros["frecuenciaLavadoManos"],
+                        "ingresoCentroMedico" => $registros["ingresoCentroMedico"],
+                        "cantidadPersonas" => $registros["cantidadPersonas"],
+                        "usoMascarilla" => $registros["usoMascarilla"],
+                        "desinfectante" => $registros["desinfectante"],
+                        "ejercicio" => $registros["ejercicio"],
+                        "diasConSintomas" => $registros["diasConSintomas"],
+                        "fechaIngreso" => date("d") . "-" . date("m") . "-" . date("Y") . "  " . date("H") . ":" . date("i") . ":" . date("s")
+                    );
+                    $paciente = $pacientes[$cPacientes][$identidad];
+                    break;
+            }
+        }
+
+        $archivo = fopen('../Datos/pacientesN.json', 'w');
+        fwrite($archivo, json_encode($pacientes));
+        fclose($archivo);
+        
+        if($paciente == false){
+            echo json_encode(array(
+                "estado" => false
+            ));
+        }else{
+            echo json_encode(array(
+                "estado" => true
+            ));
+        }
+        
+    }
+
+}

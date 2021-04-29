@@ -6,6 +6,7 @@ var selectEnfermedades = document.getElementById("enfermedades-base");
 var selectEnfermedades2 = document.getElementById("enfermedades-base-n");
 var selectSintomas = document.getElementById("s-sintomas");
 var selectSintomas2 = document.getElementById("s-sintomas-n");
+var selectHistorial = document.getElementById("tipo-paciente");
 var covid;
 var tipoPaciente = 2;
 
@@ -21,6 +22,7 @@ selectEnfermedades.addEventListener('change', analizarOpcion);
 selectSintomas.addEventListener('change', analizarOpcionSintomas);
 selectEnfermedades2.addEventListener('change', analizarOpcion);
 selectSintomas2.addEventListener('change', analizarOpcionSintomas);
+selectHistorial.addEventListener('change', verificarTipo);
 
 function actualizar(e){
 
@@ -36,7 +38,7 @@ function actualizar(e){
         mostrarNoCovid();
     }else if(valorActualSelect == 3){
         covid = 3;
-        mostrarModalMultiUso("¡Bienvenido/a!", "¡Felicidades por estar pendiente de su mejora!");
+        mostrarModalHistorial();
     }
     else{
         mostrarAlert("Error desconocido, intente nuevamente");
@@ -383,6 +385,11 @@ function mostrarAlert(texto){
 
 function ingresarUsuario(metodo, datosCovid){
     datosCovid = datosCovid || obtenerDatosCovid();
+    let url;
+    metodo == "POST" ? url = obtenerRuta(): url = obtenerRuta() + `=${datosCovid.identidad}`;
+    console.log(url);
+    console.log(datosCovid);
+    console.log(metodo);
     axios({
         method: metodo,
         url: rutaCovid,
@@ -402,9 +409,14 @@ function ingresarUsuario(metodo, datosCovid){
 
 function ingresarUsuarioNoCovid(metodo, datosNoCovid){
     datosNoCovid = datosNoCovid || obtenerDatosNoCovid();
+    let url;
+    metodo == "POST" ? url = obtenerRuta(): url = obtenerRuta() + `=${datosNoCovid.identidad}`;
+    console.log(url);
+    console.log(datosNoCovid);
+    console.log(metodo);
     axios({
         method: metodo,
-        url: rutaNoCovid,
+        url: url,
         responseType: 'json',
         data: datosNoCovid
     }).then(res => {
@@ -423,41 +435,44 @@ function mostrarModalMultiUso(titulo, cuerpo){
     
     document.getElementById('titulo-multi-uso').innerHTML = titulo;
     document.getElementById('cuerpo-modal').innerHTML = cuerpo;
-    if(covid == 3){
-        document.getElementById("cualquier-cosa").innerHTML += `<input id="id-get" type="number" class="form-control" placeholder="Ingrese su identidad"><br>`;
-        document.getElementById("cualquier-cosa").innerHTML += `
-        <span>Seleccione el tipo de paciente</span>
-        <select class="form-control" name="tipo-paciente" id="tipo-paciente">
-            <option selected value="2">Seleccione una opción</option>
-            <option value="1">Paciente COVID</option>
-            <option value="0">Paciente NO COVID</option>
-        </select>`;
-        document.getElementById("botones-modal-multi-uso").innerHTML += `
-            <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" onclick="verificarPacienteTipo()">Ver historial</button>
-        `;
-        document.getElementById("tipo-paciente").addEventListener('change', verificarTipo);
-    }else if(covid == 1){
+    if(covid == 1){
         document.getElementById("botones-modal-multi-uso").innerHTML += `
             <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary" onclick="ingresarUsuario('PUT')">Sí</button>
+            <button type="button" class="btn btn-primary" onclick="ingresarUsuario('PUT'); cerrarModalMultiUso()">Sí</button>
         `;
     }else{
         document.getElementById("botones-modal-multi-uso").innerHTML += `
             <button type="button" class="btn btn-secondary" onclick="cerrarModalMultiUso()" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary" onclick="ingresarUsuarioNoCovid('PUT')">Sí</button>
+            <button type="button" class="btn btn-primary" onclick="ingresarUsuarioNoCovid('PUT'); cerrarModalMultiUso()">Sí</button>
         `;
     }
     $('#modal-multi-uso').modal('show');
 }
 
+function mostrarModalHistorial(){
+    $('#modal-historial').modal('show');
+}
+
+function cerrarModalHistorial(){
+    selectPrincipal.value = 0;
+    selectHistorial.value = 2;
+    limpiarModalHistorial();
+    $('#modal-historial').modal('hide');
+}
+
+function limpiarModalHistorial(){
+    document.getElementById("id-get").value = '';
+}
+
 function cerrarModalMultiUso(){
-    document.getElementById("cualquier-cosa").innerHTML = '';
-    document.getElementById("botones-modal-multi-uso").innerHTML = '';
+    limpiarModalMultiUso();
     $('#modal-multi-uso').modal('hide');
 }
 
-
+function limpiarModalMultiUso(){
+    document.getElementById("cualquier-cosa").innerHTML = '';
+    document.getElementById("botones-modal-multi-uso").innerHTML = '';
+}
 
 function verificarTipo(e){
     let valor = e.target.value;

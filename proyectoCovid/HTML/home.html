@@ -481,6 +481,37 @@
         </div>
         <!-- FIN MODAL SÍNTOMAS -->
 
+        <!-- MODAL HISTORIAL -->
+        <div id="modal-historial" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="titulo-historial" class="modal-title">¡Bienvenido/a!</h5>
+                        <button onclick="cerrarModalHistorial()" type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="cualquier-cosa-historial" class="modal-body">
+                        <p id="cuerpo-modal-historial">Felicidades por estar pendiente de su mejora</p>
+                        <input id="id-get" type="number" class="form-control" placeholder="Ingrese su identidad"><br>
+                        <span>Seleccione el tipo de paciente</span>
+                        <select class="form-control" name="tipo-paciente" id="tipo-paciente">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Paciente COVID</option>
+                            <option value="0">Paciente NO COVID</option>
+                        </select>
+                    </div>
+
+                    <div id="botones-modal-historial" class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="cerrarModalHistorial()" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="verificarPacienteTipo()">Ver historial</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN MODAL HISTORIAL -->
+
         <!-- MODAL MULTI-USOS -->
         <div id="modal-multi-uso" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
