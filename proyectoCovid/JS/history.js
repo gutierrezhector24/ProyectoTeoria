@@ -1,5 +1,7 @@
 var rutaCovid = '../Backend/API/Pacientes.php';
 var rutaNoCovid = '../Backend/API/PacientesNC.php';
+var rutaRerencias = '../Backend/API/Referencias.php';
+var paciente;
 
 function leerCookie(identificador) {
     let name = identificador + "=";
@@ -29,6 +31,7 @@ function obtenerPaciente() {
         console.log(res.data);
         if (res.data.estado == true) {
             console.log(res.data.paciente);
+            paciente = res.data.paciente;
             llenarTablas(res.data.paciente);
         } else {
             mostrarAlert("Usuario inexistente");
@@ -53,6 +56,8 @@ function cerrarSesion() {
 obtenerPaciente();
 
 function llenarTablas(paciente) {
+    // console.log(paciente.nombre);
+    document.getElementById("name-span").innerHTML = paciente.nombre;
     llenarTablaDatosGenerales(paciente);
     llenarTablaEnfermedades(paciente);
     llenarTablaSintomas(paciente);
@@ -130,7 +135,7 @@ function llenarTablaEnfermedades(paciente) {
     if(paciente.enfermedadesBase.length == 0){
         document.getElementById('e-b').innerHTML += `
         <tr>
-            <td>Enfermedad>Enfermedades</td>
+            <td>Enfermedades</td>
             <td>Sin enfermedades base</td>      
             <td>
                 <i class="delet far fa-trash-alt fa-lg text-danger"></i>
@@ -368,4 +373,8 @@ function mascarilla(i){
 function desinfectante(i){
     let desinfectante = ["Cloro", "Amonio", "Alcohol al 70%", "Alcohol al 96%"];
     return desinfectante[i - 1];
+}
+
+function verDetalles(){
+    
 }

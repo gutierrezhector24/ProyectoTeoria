@@ -56,6 +56,9 @@ session_start();
             }
         break;
         case 'PUT':
+            if(isset($_GET['id'])){
+                Paciente::actualizarRegistros($_GET['id'], $_POST);
+            }
             break;
     }
 ?>

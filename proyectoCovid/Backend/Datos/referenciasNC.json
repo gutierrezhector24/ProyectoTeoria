@@ -148,5 +148,31 @@
         "frecuentemente": {
             "valorPeligro": 10
         }
+    },
+    "tipoSangre": {
+        "Amas": {
+            "valorPeligro": 8
+        },
+        "Amenos": {
+            "valorPeligro": 7
+        },
+        "Bmas": {
+            "valorPeligro": 4
+        },
+        "Bmenos": {
+            "valorPeligro": 4
+        },
+        "ABmas": {
+            "valorPeligro": 6
+        },
+        "ABmenos": {
+            "valorPeligro": 5
+        },
+        "Omas": {
+            "valorPeligro": 2
+        },
+        "Omenos": {
+            "valorPeligro": 1
+        }
     }
 }

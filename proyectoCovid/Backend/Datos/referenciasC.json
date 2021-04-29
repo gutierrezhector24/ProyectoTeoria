@@ -145,5 +145,31 @@
         "diecinueveMas": {
             "valorPeligro": 8
         }
+    },
+    "tipoSangre": {
+        "Amas": {
+            "valorPeligro": 9
+        },
+        "Amenos": {
+            "valorPeligro": 8
+        },
+        "Bmas": {
+            "valorPeligro": 5
+        },
+        "Bmenos": {
+            "valorPeligro": 5
+        },
+        "ABmas": {
+            "valorPeligro": 7
+        },
+        "ABmenos": {
+            "valorPeligro": 6
+        },
+        "Omas": {
+            "valorPeligro": 3
+        },
+        "Omenos": {
+            "valorPeligro": 2
+        }
     }
 }

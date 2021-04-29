@@ -386,13 +386,13 @@ function mostrarAlert(texto){
 function ingresarUsuario(metodo, datosCovid){
     datosCovid = datosCovid || obtenerDatosCovid();
     let url;
-    metodo == "POST" ? url = obtenerRuta(): url = obtenerRuta() + `=${datosCovid.identidad}`;
+    metodo == "POST" ? url = rutaCovid: url = rutaCovid + `?id=${datosCovid.identidad}`;
     console.log(url);
     console.log(datosCovid);
     console.log(metodo);
     axios({
         method: metodo,
-        url: rutaCovid,
+        url: url,
         responseType: 'json',
         data: datosCovid
     }).then(res => {

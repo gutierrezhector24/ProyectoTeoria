@@ -446,13 +446,11 @@ class Paciente {
 
     public static function actualizarRegistros($identidad, $registros){
         $pacientes = json_decode(self::getPaciente(), true);
-        $paciente1 = false;
         $paciente = false;
 
         for ($cPacientes = 0; $cPacientes < sizeof($pacientes); $cPacientes++) {
             error_reporting(0);
             if ($pacientes[$cPacientes][$identidad]) {
-                $paciente1 = $pacientes[$cPacientes][$identidad];
                     $pacientes[$cPacientes][$identidad][] = array(
                         "nombre" => $pacientes[$cPacientes][$identidad][0]["nombre"],
                         "identidad" => $pacientes[$cPacientes][$identidad][0]["identidad"],

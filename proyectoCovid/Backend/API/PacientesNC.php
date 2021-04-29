@@ -61,22 +61,6 @@ session_start();
         break;
         case 'PUT':
             if(isset($_GET['id'])){
-                // Paciente::actualizarRegistros(
-                //     $_GET['id'], 
-                //     $_POST['peso'], 
-                //     $_POST['estatura'], 
-                //     $_POST['edad'],
-                //     $_POST['tipoSangre'],
-                //     $_POST['enfermedadesBase'],
-                //     $_POST['sintomas'],
-                //     $_POST['frecuenciaLavadoManos'],
-                //     $_POST['ingresoCentroMedico'],
-                //     $_POST['cantidadPersonas'],
-                //     $_POST['usoMascarilla'],
-                //     $_POST['desinfectante'],
-                //     $_POST['ejercicio'],
-                //     $_POST['diasConSintomas']
-                // );
                 Paciente::actualizarRegistros($_GET['id'], $_POST);
             }
             break;

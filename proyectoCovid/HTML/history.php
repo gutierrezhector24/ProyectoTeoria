@@ -27,14 +27,14 @@ if ($_SESSION["token"] != $_COOKIE["token"])
 </head>
 
 <body class="contP col-sm-12 pt-5 pl-4 pb-5">
-  <div class="card">
+  <div id="datos-paciente" class="card">
     <div class="card-header">
       <span class="title">Historial de Usuario</span>
       <div class="btn-group float-right" role="group">
         <button onclick="cerrarSesion()" type="button" class="bt btn btn-warning mt-2 mb-2">
           Regresar
         </button>
-        <button type="button" class="bt btn btn-info mt-2 mb-2">
+        <button onclick="verDetalles()" type="button" class="bt btn btn-info mt-2 mb-2">
           Detalles
         </button>
       </div>
@@ -44,7 +44,7 @@ if ($_SESSION["token"] != $_COOKIE["token"])
       <div class="col-sm-5 card border-info">
         <div class="circle">
           <div class="image"></div>
-          <span class="name">Ángel Zelaya</span>
+          <span id="name-span" class="name"></span>
         </div>
       </div>
 
