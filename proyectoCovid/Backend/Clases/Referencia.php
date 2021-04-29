@@ -5,7 +5,12 @@ date_default_timezone_set("America/Tegucigalpa");
     class Referencia{
         public static function getReferencia($ruta){
             $ruta = '../Datos/' . $ruta;
-            return json_decode(file_get_contents($ruta), true);
+            $referencia = json_decode(file_get_contents($ruta), true);
+            echo json_encode(
+                array(
+                    "referencia" => $referencia
+                )
+            );
         }
     }
 

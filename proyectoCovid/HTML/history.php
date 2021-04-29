@@ -24,6 +24,7 @@ if ($_SESSION["token"] != $_COOKIE["token"])
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
   <link rel="stylesheet" href="../CSS/history.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 <body class="contP col-sm-12 pt-5 pl-4 pb-5">

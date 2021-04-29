@@ -1,5 +1,6 @@
 var rutaCovid = '../Backend/API/Pacientes.php';
 var rutaNoCovid = '../Backend/API/PacientesNC.php';
+var rutaReferencia = '../Backend/API/Referencias.php';
 
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
@@ -411,9 +412,6 @@ function ingresarUsuarioNoCovid(metodo, datosNoCovid){
     datosNoCovid = datosNoCovid || obtenerDatosNoCovid();
     let url;
     metodo == "POST" ? url = obtenerRuta(): url = obtenerRuta() + `=${datosNoCovid.identidad}`;
-    console.log(url);
-    console.log(datosNoCovid);
-    console.log(metodo);
     axios({
         method: metodo,
         url: url,
@@ -425,6 +423,42 @@ function ingresarUsuarioNoCovid(metodo, datosNoCovid){
             reiniciarFormulario();
         }else{
             mostrarModalMultiUso("Paciente NO COVID ya existe", "¿Desea actualizar sus registros?");
+        }
+    }).catch(err => {
+        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
+    });
+}
+
+function obtenerReferenciaCovid(){
+    axios({
+        method: 'GET',
+        url: rutaReferencia + '?id=1',
+        responseType: 'json'
+    }).then(res => {
+        if(res.data.referencia){
+            // En res.data.referencia están las referencias con sus valores de peligro
+            // Ver el archivos referenciasC.json para saber lo que viene ahí
+            // Esta función puede ser utilizada en history.js
+        }else{
+            // Hubo algún error en la petición, mostrarlo en una modal multi usos
+        }
+    }).catch(err => {
+        mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
+    });
+}
+
+function obtenerReferenciaNoCovid(){
+    axios({
+        method: 'GET',
+        url: rutaReferencia + '?id=1',
+        responseType: 'json'
+    }).then(res => {
+        if(res.data.referencia){
+            // En res.data.referencia están las referencias con sus valores de peligro
+            // Ver el archivos referenciasNC.json para saber lo que viene ahí
+            // Esta función puede ser utilizada en history.js
+        }else{
+            // Hubo algún error en la petición, mostrarlo en una modal multi usos
         }
     }).catch(err => {
         mostrarAlert(`Hubo un error con el servidor, intente más tarde (${err})`);
