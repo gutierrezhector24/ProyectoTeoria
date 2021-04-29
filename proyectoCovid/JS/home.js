@@ -2,6 +2,9 @@ var rutaCovid = '../Backend/API/Pacientes.php';
 var rutaNoCovid = '../Backend/API/PacientesNC.php';
 var rutaReferencia = '../Backend/API/Referencias.php';
 
+var datosReferenciaSimular;
+var datosReferenciaSimularNo;
+
 var selectPrincipal = document.getElementById("p-i");
 var selectEnfermedades = document.getElementById("enfermedades-base");
 var selectEnfermedades2 = document.getElementById("enfermedades-base-n");
@@ -17,6 +20,35 @@ var sintomas = [];
 var enfermedadesBaseNoCovid = [];
 var sintomasNoCovid = [];
 
+/*
+var valoresGrafica = {
+    peligroDiasConSintomas = 0,
+    peligroEdad = 0,
+    peligroEjercicio = 0,
+    peligroEnfermedadesBase ={enfermedad1, enfermedad2, enfermedad3, enfermedad4},
+    //peligroEstatura = 0,
+    //peligroIdentidad = 0,
+    peligroIngresoCentroMedico = 0,
+    //peligroPeso = 0,
+    peligroSexo = 0,
+    peligroSintomas = 0,
+    peligroTipoSangre = 0
+}*/
+
+/*
+var valoresGraficaNo = {
+    peligroDiasConSintomas = 0,
+    peligroEdad = 0,
+    peligroEjercicio = 0,
+    peligroEnfermedadesBase = 0,
+    //peligroEstatura = 0,
+    //peligroIdentidad = 0,
+    peligroIngresoCentroMedico = 0,
+    //peligroPeso = 0,
+    peligroSexo = 0,
+    peligroSintomas = 0,
+    peligroTipoSangre = 0
+}*/
 
 selectPrincipal.addEventListener('change', actualizar);
 selectEnfermedades.addEventListener('change', analizarOpcion);
@@ -322,13 +354,26 @@ var selectorN = document.querySelector('#nn');
 var covidBarras;
 var covidCircular;
 
+ function simularCovid(datosC){
+    //mandar parametros de validacion de formulario
+    let tipoCovid = selectorM.value;
+    mostrarSimularCovid();
+    if(tipoCovid == 1){
+      graficarCovidBarras(tipoCovid, datosC);
+    }else{
+       graficarCovidCircular(tipoCovid, datosC);
+    }
+    
+ }
+
+ /*
 function simularCovid(){
     if(covid == 1){
         validarCovid();
     }else{
         validarCovidNo();
     }
-}
+}*/
 
 function validarCovid(){
     if(
@@ -350,6 +395,7 @@ function validarCovid(){
     }else{
         let datosCovid = obtenerDatosCovid();
         ingresarUsuario('POST', datosCovid);
+        
     }
 }
 
@@ -376,6 +422,7 @@ function validarCovidNo(){
     }else{
         let datosNoCovid = obtenerDatosNoCovid();
         ingresarUsuarioNoCovid('POST', datosNoCovid);
+
     }
 }
 
@@ -399,7 +446,13 @@ function ingresarUsuario(metodo, datosCovid){
     }).then(res => {
         if(res.data.estado == true){
             metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
+            
+            //obtenerReferenciaCovid();
+            datosSimulaGraficaCovid(datosCovid);
+            simularCovid(valoresGrafica);       
+                 
             reiniciarFormulario();
+ 
         }else{
             mostrarModalMultiUso("Paciente COVID ya existe", "¿Desea actualizar sus registros?");
         }
@@ -420,6 +473,10 @@ function ingresarUsuarioNoCovid(metodo, datosNoCovid){
     }).then(res => {
         if(res.data.estado == true){
             metodo == 'POST' ? mostrarAlert("Usuario registrado"): mostrarAlert("Usuario actualizado");
+            
+            datosSimulaGraficaNoCovid(datosNoCovid);
+            simularNoCovid(valoresGraficaNo);            
+            
             reiniciarFormulario();
         }else{
             mostrarModalMultiUso("Paciente NO COVID ya existe", "¿Desea actualizar sus registros?");
@@ -436,6 +493,9 @@ function obtenerReferenciaCovid(){
         responseType: 'json'
     }).then(res => {
         if(res.data.referencia){
+            datosReferenciaSimular = res.data.referencia;
+            console.log('entro');
+            console.log(datosReferenciaSimular);
             // En res.data.referencia están las referencias con sus valores de peligro
             // Ver el archivos referenciasC.json para saber lo que viene ahí
             // Esta función puede ser utilizada en history.js
@@ -454,6 +514,9 @@ function obtenerReferenciaNoCovid(){
         responseType: 'json'
     }).then(res => {
         if(res.data.referencia){
+            datosReferenciaSimularNo = res.data.referencia;
+            console.log('entro');
+            console.log(datosReferenciaSimularNo);
             // En res.data.referencia están las referencias con sus valores de peligro
             // Ver el archivos referenciasNC.json para saber lo que viene ahí
             // Esta función puede ser utilizada en history.js
@@ -618,14 +681,14 @@ function verificarPacienteTipo(){
     }
 }
 
-function simularNoCovid(){
+function simularNoCovid(datosNoCo){
    //mandar parametros de validacion de formulario
    let tipoNoCovid = selectorN.value;
    mostrarSimularNoCovid();
    if(tipoNoCovid == 1){
-      graficarNoCovidBarras(tipoNoCovid, datosNoCovid);
+      graficarNoCovidBarras(tipoNoCovid, datosNoCo);
    }else{
-      graficarNoCovidCircular(tipoNoCovid, datosNoCovid);
+      graficarNoCovidCircular(tipoNoCovid, datosNoCo);
    }
 }
 
@@ -685,9 +748,180 @@ function ocultarCircularNoCovid(){
    document.getElementById('chart-noCovid-circular').style.display = 'none';
 }
 
-function graficaBarrasCovid(datos){
+function datosSimulaGraficaCovid(datos){
+    obtenerReferenciaCovid();
+    
+    
+    //aqui es para hacerlo mas dinamico y se recorre hasta la cantidad de elementos en ese arreglo, no se si funcione
+    if(datos['edad'] <= 20){
+        valoresGrafica.peligroEdad = 2;
+    }
+    if((datos['edad'] > 20) && (datos['edad'] <= 40)){
+        valoresGrafica.peligroEdad = 9;
+    }
+    if((datos['edad'] > 40) && (datos['edad'] <= 70)){
+        valoresGrafica.peligroEdad = 7;
+    }
+    if(datos['edad'] > 70){
+        valoresGrafica.peligroEdad = 8;
+    }
+    
+    for(let i=1; i=datosReferenciaSimular['diasConSintomas'].length; i++){
+        if(datos['diasConSintomas'] == i);
+        valoresGrafica.peligroDiasConSintomas = datosReferenciaSimular['diasConSintomas'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimular['ejercicio'].length; i++){
+        if(datos['ejercicio'] == i);
+        valoresGrafica.peligroEjercicio = datosReferenciaSimular['ejercicio'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimular['sexo'].length; i++){
+        if(datos['sexo'] == i);
+        valoresGrafica.peligroSexo = datosReferenciaSimular['sexo'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimular['tipoSangre'].length; i++){
+        if(datos['tipoSangre'] == i);
+        valoresGrafica.peligroTipoSangre = datosReferenciaSimular['tipoSangre'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimular['enfermedadesBase'].length; i++){
+        for(let j=1; j=datos['enfermedadesBase'].length; j++){
+           if(datos['enfermedadesBase'][j] == datosReferenciaSimular['enfermedadesBase'][i]);
+           valoresGrafica.peligroEnfermedadesBase = datosReferenciaSimular['efermedadesBase'][i].valorPeligro;
+        }
+    }
+
+    for(let i=1; i=datosReferenciaSimular['sintomas'].length; i++){
+        for(let j=1; j=datos['sintomas'].length; j++){
+           if(datos['sintomas'][j] == datosReferenciaSimular['sintomas'][i]);
+           valoresGrafica.peligroEnfermedadesBase = datosReferenciaSimular['sintomas'][i].valorPeligro;
+        }
+    }
+
+
+
+    //esta era otra opcion mas larga
+    /*
+    if(datos['diasConSintomas'] == 1){
+        valoresGrafica.peligroDiasConSintomas = 1;
+    }
+    if(datos['diasConSintomas'] == 2){
+        valoresGrafica.peligroDiasConSintomas = 3;
+    }
+    if(datos['diasConSintomas'] == 3){
+        valoresGrafica.peligroDiasConSintomas = 5;
+    }
+    if(datos['diasConSintomas'] == 4){
+        valoresGrafica.peligroDiasConSintomas = 8;
+    }
+    if(datos['edad'] <= 20){
+        valoresGrafica.peligroEdad = 2;
+    }
+    if((datos['edad'] > 20) && (datos['edad'] <= 40)){
+        valoresGrafica.peligroEdad = 9;
+    }
+    if((datos['edad'] > 40) && (datos['edad'] <= 70)){
+        valoresGrafica.peligroEdad = 7;
+    }
+    if(datos['edad'] > 70){
+        valoresGrafica.peligroEdad = 8;
+    }
+    if(datos['ejercicio'] == 1){
+        valoresGrafica.peligroEjercicio = -2;
+    }
+    if(datos['ejercicio'] == 2){
+        valoresGrafica.peligroEjercicio = -4;
+    }
+    if(datos['ejercicio'] == 3){
+        valoresGrafica.peligroEjercicio = -6;
+    }
+    if((datos['enfermedadesBase'][1] != null) && (datos['enfermedadesBase'][1] == 1)){
+        valoresGrafica.peligroEnfermedadesBase = 9;
+    }
+    if((datos['enfermedadesBase'][2] != null) && (datos['enfermedadesBase'][2] == 2)){
+        valoresGrafica.peligroEnfermedadesBase = 9;
+    }
+    if((datos['enfermedadesBase'][3] != null) && (datos['enfermedadesBase'][3] == 3)){
+        valoresGrafica.peligroEnfermedadesBase = 9;
+    }
+    if((datos['enfermedadesBase'][4] != null) && (datos['enfermedadesBase'][4] == 4)){
+        valoresGrafica.peligroEnfermedadesBase = 8;
+    }
+    if(datos['ingresoCentroMedico'] == 1){
+        valoresGrafica.peligroIngresoCentroMedico = 2;
+    }
+    if(datos['ingresoCentroMedico'] == 2){
+        valoresGrafica.peligroIngresoCentroMedico = 8;
+    }
+    if(datos['sexo'] == 1){
+        valoresGrafica.peligroSexo = 1;
+    }
+    if(datos['sexo'] == 2){
+        valoresGrafica.peligroSexo = 3;
+    }*/
+}
+
+function datosSimulaGraficaNoCovid(datos){
+    obtenerReferenciaNoCovid();
+    
+    
+    //aqui es para hacerlo mas dinamico y se recorre hasta la cantidad de elementos en ese arreglo, no se si funcione
+    if(datos['edad'] <= 20){
+        valoresGraficaNo.peligroEdad = 2;
+    }
+    if((datos['edad'] > 20) && (datos['edad'] <= 40)){
+        valoresGraficaNo.peligroEdad = 9;
+    }
+    if((datos['edad'] > 40) && (datos['edad'] <= 70)){
+        valoresGraficaNo.peligroEdad = 7;
+    }
+    if(datos['edad'] > 70){
+        valoresGraficaNo.peligroEdad = 8;
+    }
+    
+    for(let i=1; i=datosReferenciaSimularNo['diasConSintomas'].length; i++){
+        if(datos['diasConSintomas'] == i);
+        valoresGraficaNo.peligroDiasConSintomas = datosReferenciaSimularNo['diasConSintomas'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimularNo['ejercicio'].length; i++){
+        if(datos['ejercicio'] == i);
+        valoresGraficaNo.peligroEjercicio = datosReferenciaSimularNo['ejercicio'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimularNo['sexo'].length; i++){
+        if(datos['sexo'] == i);
+        valoresGraficaNo.peligroSexo = datosReferenciaSimularNo['sexo'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimularNo['tipoSangre'].length; i++){
+        if(datos['tipoSangre'] == i);
+        valoresGraficaNo.peligroTipoSangre = datosReferenciaSimularNo['tipoSangre'][i].valorPeligro;
+    }
+
+    for(let i=1; i=datosReferenciaSimularNo['enfermedadesBase'].length; i++){
+        for(let j=1; j=datos['enfermedadesBase'].length; j++){
+           if(datos['enfermedadesBase'][j] == datosReferenciaSimularNo['enfermedadesBase'][i]);
+           valoresGraficaNo.peligroEnfermedadesBase = datosReferenciaSimularNo['efermedadesBase'][i].valorPeligro;
+        }
+    }
+
+    for(let i=1; i=datosReferenciaSimularNo['sintomas'].length; i++){
+        for(let j=1; j=datos['sintomas'].length; j++){
+           if(datos['sintomas'][j] == datosReferenciaSimularNo['sintomas'][i]);
+           valoresGraficaNo.peligroEnfermedadesBase = datosReferenciaSimularNo['sintomas'][i].valorPeligro;
+        }
+    }
+
+}
+
+function graficaBarrasCovid(valoresGraficaC){
    
    let titulo = 'Covid';
+
+
 
    let ctxBarrasCovid = document.getElementById('chart-covid').getContext('2d');
    let chartBarrasCovid = new Chart(ctxBarrasCovid, {
@@ -696,8 +930,8 @@ function graficaBarrasCovid(datos){
          labels: ['Base', 'Recuperarse', 'Morir', 'Enfermedades'],
          datasets: [{
             label: titulo,
-            data: [datos["valorBase"], datos["probabilidadRecuperarse"],
-                   datos["probabilidadMorir"], datos["valorEnfermedades"]],
+            data: [valoresGraficaC["peligroSexo"], valoresGraficaC["peligroEnfermedadesBase"],
+                   valoresGraficaC["peligroEdad"], valoresGraficaC["peligroDiasConSintomas"]],
             backgroundColor: [
                 'rgba(9, 216, 243, 0.3)',
                 'rgba(112, 255, 45, 0.3)',
@@ -834,11 +1068,11 @@ function graficaCircularNoCovid(datos){
 
 }
 
-selectorM.addEventListener('change', actualiza);
+selectorM.addEventListener('change', actualizaM);
 
-function actualiza(e){
-    let valorAct = e.target.value;
-    console.log(valorAct);
+function actualizaM(e){
+    let valorActM = e.target.value;
+    console.log(valorActM);
     simularCovid();
 }
 
