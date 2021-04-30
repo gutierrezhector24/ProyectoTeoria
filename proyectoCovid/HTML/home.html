@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/home.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    
+
 </head>
 
 <body>
     <main class="contP d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="contP"></div>
         <div class="container">
+            <!--formulario inicial-->
             <form id="pregunta-inicial" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5">
                 <div class="form-group">
                     <span for="p-i">Seleccione una opción</span>
@@ -31,6 +32,7 @@
                 </div>
             </form>
 
+            <!--formulario no covid-->
             <form id="no-covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
                 <div class="form-group row">
@@ -40,7 +42,19 @@
                     </div>
                     <div class="col-md-6">
                         <span>Identidad</span>
-                        <input id="identidad-n" type="number" class="form-control" placeholder="Ingrese su numero de identidad">
+                        <input id="identidad-n" type="number" class="form-control"
+                            placeholder="Ingrese su numero de identidad">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Peso</span>
+                        <input id="peso-n" type="number" class="form-control" placeholder="Ingrese su peso (en libras)">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Estatura</span>
+                        <input type="number" id="estatura-n" class="form-control" placeholder="Ingrese su estatura (en cm)">
                     </div>
                 </div>
 
@@ -50,11 +64,36 @@
                         <input id="edad-n" type="number" class="form-control" placeholder="Ingrese su edad">
                     </div>
                     <div class="col-md-6">
+                        <span>Tipo de Sangre</span>
+                        <select name="tipo-sangre-n" id="tipo-sangre-n" class="form-control">
+                            <option value="">Seleccione una</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">AB+</option>
+                            <option value="6">AB-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
                         <span>Sexo</span>
                         <select name="sexo-n" id="sexo-n" class="form-control">
                             <option value="">Seleccione una opción</option>
                             <option value="1">Femenino</option>
                             <option value="2">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Enfermedades base</span>
+                        <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
+                            <option selected value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option onclick="limpiarArregloEnfermedadesBase()" value="0">No</option>
                         </select>
                     </div>
                 </div>
@@ -63,23 +102,11 @@
                     <div class="col-md-6">
                         <span>Síntomas</span>
                         <select class="form-control" name="s-sintomas-n" id="s-sintomas-n">
-                            <option selected value="2">Seleccione una opción</option>
+                            <option selected value="">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloSintomas()" value="0">No</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <span>Enfermedades base</span>
-                        <select class="form-control" name="enfermedades-base-n" id="enfermedades-base-n">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <div class="col-md-6">
                         <span>Frecuencia del lavado de manos</span>
                         <select class="form-control" name="lavado-manos" id="lavado-manos">
@@ -89,19 +116,17 @@
                             <option value="3">Frecuentemente</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <span>Uso de mascarilla</span>
-                        <select class="form-control" name="uso-mascarilla" id="uso-mascarilla">
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">Nunca</option>
-                            <option value="2">Poco</option>
-                            <option value="3">Frecuentemente</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ingreso en algún centro médico</span>
+                        <select class="form-control" name="ingreso-n" id="ingreso-n">
+                            <option selected value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <span>Cantidad de personas en lugares donde visita</span>
                         <select class="form-control" name="cantidad-personas" id="cantidad-personas">
@@ -111,7 +136,18 @@
                             <option value="3">Mas de 151</option>
                         </select>
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Uso de mascarilla</span>
+                        <select class="form-control" name="uso-mascarilla" id="uso-mascarilla">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Nunca</option>
+                            <option value="2">Poco</option>
+                            <option value="3">Frecuentemente</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <span>Tipo de desinfectante que utiliza</span>
                         <select class="form-control" name="tipo-desinfectante" id="tipo-desinfectante">
@@ -119,20 +155,45 @@
                             <option value="1">Cloro</option>
                             <option value="2">Amonio</option>
                             <option value="3">Alcohol al 70%</option>
-                            <option value="3">Alcohol al 96%</option>
+                            <option value="4">Alcohol al 96%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ejercicio</span>
+                        <select class="form-control" name="ejercicio-n" id="ejercicio-n">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Poco</option>
+                            <option value="2">Intermedio</option>
+                            <option value="3">Mucho</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Días con síntomas</span>
+                        <select class="form-control" name="dias-con-sintomas-n" id="dias-con-sintomas-n">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">1-3</option>
+                            <option value="2">4-10</option>
+                            <option value="3">11-18</option>
+                            <option value="4">19+</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
-                        <button id="regresar-no-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-no-covid" type="button" class="btn btn-outline-info" onclick="simular()">Simular</button>
+                        <button id="regresar-no-covid" type="button" class="btn btn-outline-danger"
+                            onclick="regresar()">Regresar</button>
+                        <button id="simular-no-covid" type="button" class="btn btn-outline-info"
+                            onclick="simular()">Simular</button>
                     </div>
                 </div>
 
             </form>
 
+            <!--formulario covid-->
             <form id="covid" class="form pt-5 pl-5 pr-5 pb-5 mb-5 mt-5" style="display: none;">
                 <h5 class="mb-4"><strong>SIMULADOR DE COVID</strong></h5>
 
@@ -143,7 +204,8 @@
                     </div>
                     <div class="col-md-6">
                         <span>Identidad</span>
-                        <input id="identidad" type="number" class="form-control" placeholder="Ingrese su numero de identidad">
+                        <input id="identidad" type="number" class="form-control"
+                            placeholder="Ingrese su numero de identidad">
                     </div>
                 </div>
 
@@ -153,6 +215,34 @@
                         <input id="edad" type="number" class="form-control" placeholder="Ingrese su edad">
                     </div>
                     <div class="col-md-6">
+                        <span>Altura</span>
+                        <input id="altura" type="number" class="form-control" placeholder="Ingrese su altura en metros">
+                    </div> 
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Peso</span>
+                        <input id="peso" type="number" class="form-control" placeholder="Ingrese su peso en libras">
+                    </div>
+                    <div class="col-md-6">
+                        <span>Tipo de Sangre</span>
+                        <select name="tipo-sangre" id="tipo-sangre" class="form-control">
+                            <option value="0">Seleccione una</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">AB+</option>
+                            <option value="6">AB-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
                         <span>Sexo</span>
                         <select name="sexo" id="sexo" class="form-control">
                             <option value="">Seleccione una opción</option>
@@ -160,72 +250,25 @@
                             <option value="2">Masculino</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <span>Peso</span>
-                        <input id="peso" type="number" class="form-control" placeholder="Ingrese su peso en Libras">
-                    </div>
-
                     <div class="col-md-6">
                         <span>Enfermedades base</span>
                         <select class="form-control" name="enfermedades-base" id="enfermedades-base">
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloEnfermedadesBase()" value="0">No</option>
                         </select>
                     </div>
-                </div>
-
+                 </div>
+              
                 <div class="form-group row">
                     <div class="col-md-6">
                         <span>Síntomas</span>
                         <select class="form-control" name="s-sintomas" id="s-sintomas">
                             <option selected value="2">Seleccione una opción</option>
                             <option value="1">Sí</option>
-                            <option value="0">No</option>
+                            <option onclick="limpiarArregloSintomas()" value="0">No</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <span>Ingreso en algún centro médico</span>
-                        <select class="form-control" name="ingreso" id="ingreso">
-                            <option selected value="2">Seleccione una opción</option>
-                            <option value="1">Sí</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <span>Tipo de Sangre</span>
-                        <select name="tipo-sangre" id="tipo-sangre" class="form-control">
-                            <option value="">Seleccione una</option>
-                            <option value="">A+</option>
-                            <option value="">A-</option>
-                            <option value="">B+</option>
-                            <option value="">B-</option>
-                            <option value="">AB+</option>
-                            <option value="">AB-</option>
-                            <option value="">O+</option>
-                            <option value="">O-</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <span>Ejercicio</span>
-                        <select class="form-control" name="ejercicio" id="ejercicio">
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">Poco</option>
-                            <option value="2">Intermedio</option>
-                            <option value="3">Mucho</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <div class="col-md-6">
                         <span>Días con síntomas</span>
                         <select class="form-control" name="dias-con-sintomas" id="dias-con-sintomas">
@@ -238,10 +281,32 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <span>Ingreso en algún centro médico</span>
+                        <select class="form-control" name="ingreso" id="ingreso">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Ejercicio</span>
+                        <select class="form-control" name="ejercicio" id="ejercicio">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">Poco</option>
+                            <option value="2">Intermedio</option>
+                            <option value="3">Mucho</option>
+                        </select>
+                    </div>
+                 </div>
+
                 <div class="form-group mt-5">
                     <div class="btn-group p1 bg-black" role="group">
-                        <button id="regresar-covid" type="button" class="btn btn-outline-danger" onclick="regresar()">Regresar</button>
-                        <button id="simular-covid" type="button" class="btn btn-outline-info" onclick="simular()">Simular</button>
+                        <button id="regresar-covid" type="button" class="btn btn-outline-danger"
+                            onclick="regresar()">Regresar</button>
+                        <button id="simular-covid" type="button" class="btn btn-outline-info"
+                            onclick="simular()">Simular</button>
                     </div>
                 </div>
 
@@ -253,162 +318,217 @@
             </form>
 
 
-            <!--Inicio canvas 1-->
-            <div id="secundario-noCovid" class="card mt-5 mb-5" style="display:none;">
-    
+            <!--Inicio canvas no covid-->
+            <div id="secundario-noCovid" class="card" style="display:none;">
+
                 <div class="card-header">
                     <span class="title mt-2 mb-2"></span>
                     <div class="btn-group float-right" role="group">
-                        <button id="regresar-secundario-noCovid" type="button" class="btn btn-warning mt-2 mb-2" style="color:white;"
-                            onclick="regresarSecundarioNoCovid()">Regresar</button>
+                        <button id="regresar-secundario-noCovid" type="button" class="btn btn-warning mt-2 mb-2"
+                            style="color:white;" onclick="regresarSecundarioNoCovid()">Regresar</button>
                     </div>
                 </div>
-    
-                <div class="card-body col-sm-12 row">    
-                    <select name="nn" id="nn">
-                        <option value="1">De barras</option>
-                        <option value="2">Circular</option>
-                    </select>
-                     
+
+                <div class="card-body col-sm-12 row">
+
+
                     <canvas id="chart-noCovid" width="400" height="400" style="display: none;"></canvas>
                     <canvas id="chart-noCovid-circular" width="770" height="385" style="display: none;"></canvas>
                 </div>
-    
+
             </div>
-            <!--Fin canvas1-->
+            <!--Fin canvas no covid-->
 
 
-            <!--Inicio canvas 2-->
-            <div id="secundario-covid" class="card mt-5 mb-5" style="display:none;">
-    
+            <!--Inicio canvas covid-->
+            <div id="secundario-covid" class="card" style="display:none;">
+
                 <div class="card-header">
                     <span class="title mt-2 mb-2"></span>
                     <div class="btn-group float-right" role="group">
-                        <button id="regresar-secundario-covid" type="button" class="btn btn-warning mt-2 mb-2" style="color:white;"
-                            onclick="regresarSecundarioCovid()">Regresar</button>
+                        <button id="regresar-secundario-covid" type="button" class="btn btn-warning mt-2 mb-2"
+                            style="color:white;" onclick="regresarSecundarioCovid()">Regresar</button>
                     </div>
                 </div>
-    
+
                 <div class="card-body col-sm-12 row">
-                    <select name="mm" id="mm">
-                        <option value="1">De barras</option>
-                        <option value="2">Circular</option>
-                    </select>
-                    
+
                     <canvas id="chart-covid" width="400" height="400" style="display: none;"></canvas>
                     <canvas id="chart-covid-circular" width="770" height="385" style="display: none;"></canvas>
                 </div>
-    
+
             </div>
-            <!--Fin canvas2-->
+            <!--Fin canvas covid-->
 
         </div>
-  
+
 
         <!-- MODAL ENFERMEDADES BASE -->
         <div class="modal" id="modal-enfermedades" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Enfermedaes crónicas</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="comprobarArregloEnfermedadesBase()">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div id="enf-base" class="checkboxx">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Enfermedaes crónicas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="comprobarArregloEnfermedadesBase()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="enf-base" class="checkboxx">
 
-                        <input type="checkbox" id="hipertension" name="hipertension" value="hipertension">
-                        <label for="hipertension">Hipertensión</label><br>
+                            <input type="checkbox" id="hipertension" name="hipertension" value="hipertension">
+                            <label for="hipertension">Hipertensión</label><br>
 
-                        <input type="checkbox" id="diabetes" name="diabetes" value="diabetes">
-                        <label for="diabetes">Diabetes</label><br>
+                            <input type="checkbox" id="diabetes" name="diabetes" value="diabetes">
+                            <label for="diabetes">Diabetes</label><br>
 
-                        <input type="checkbox" id="cancer" name="cancer" value="cancer">
-                        <label for="cancer">Cáncer</label><br>
+                            <input type="checkbox" id="cancer" name="cancer" value="cancer">
+                            <label for="cancer">Cáncer</label><br>
 
-                        <input type="checkbox" id="enfermedades-pulmonares" name="enfermedades-pulmonares" value="enfermedades-pulmonares">
-                        <label for="enfermedades-pulmonares">Enfermedades Pulmonares</label><br>
+                            <input type="checkbox" id="enfermedades-pulmonares" name="enfermedades-pulmonares"
+                                value="enfermedades-pulmonares">
+                            <label for="enfermedades-pulmonares">Enfermedades Pulmonares</label><br>
 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="reestablecerValorEB()">Cerrar</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="ocultarModalEnfermedades(); guardarEnfermedadesBase()">Guardar</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="restablecerValorEB()">Cerrar</button>
-                  <button type="button" class="btn btn-primary" onclick="ocultarModalEnfermedades(); guardarEnfermedadesBase()">Guardar</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
         <!-- FIN MODAL ENFERMEDADES BASE -->
 
         <!-- MODAL SÍNTOMAS -->
         <div class="modal" id="modal-sintomas" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Síntomas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="comprobarArregloSintomas()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="sintomas" class="checkboxx">
+
+                            <input type="checkbox" id="tos" name="tos" value="tos">
+                            <label for="tos">Tos</label><br>
+
+                            <input type="checkbox" id="congestion-nasal" name="congestion-nasal"
+                                value="congestion-nasal">
+                            <label for="congestion-nasal">Congestión nasal</label><br>
+
+                            <input type="checkbox" id="malestar-garganta" name="malestar-garganta"
+                                value="malestar-garganta">
+                            <label for="malestar-garganta">Malestar en la garganta</label><br>
+
+                            <input type="checkbox" id="dolor-corporal" name="dolor-corporal" value="dolor-corporal">
+                            <label for="dolor-corporal">Dolor corporal</label><br>
+
+                            <input type="checkbox" id="dolor-ojos" name="dolor-ojos" value="dolor-ojos">
+                            <label for="dolor-ojos">Dolor de ojos</label><br>
+
+                            <input type="checkbox" id="dolor-cabeza" name="dolor-cabeza" value="dolor-cabeza">
+                            <label for="dolor-cabeza">Dolor de cabeza</label><br>
+
+                            <input type="checkbox" id="vomito" name="vomito" value="vomito">
+                            <label for="vomito">Vómitos</label><br>
+
+                            <input type="checkbox" id="diarrea" name="diarrea" value="diarrea">
+                            <label for="diarrea">Diarrea</label><br>
+
+                            <input type="checkbox" id="decaimiento" name="decaimiento" value="decaimiento">
+                            <label for="decaimiento">Decaimiento</label><br>
+
+                            <input type="checkbox" id="fiebre" name="fiebre" value="fiebre">
+                            <label for="fiebre">Fiebre</label><br>
+
+                            <input type="checkbox" id="perdida-gusto-olfato" name="perdida-gusto-olfato"
+                                value="perdida-gusto-olfato">
+                            <label for="perdida-gusto-olfato">Pérdida de gusto y/o olfato</label><br>
+
+                            <input type="checkbox" id="opresion-pecho" name="opresion-pecho" value="opresion-pecho">
+                            <label for="opresion-pecho">Opresión en el pecho</label><br>
+
+                            <input type="checkbox" id="cansancio" name="cansancio" value="cansancio">
+                            <label for="cansancio">Cansancio</label><br>
+
+                            <input type="checkbox" id="sudoracion" name="sudoracion" value="sudoracion">
+                            <label for="sudoracion">Sudoración</label><br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="reestablecerValorS()">Cerrar</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="ocultarModalSintomas(); guardarSintomas()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN MODAL SÍNTOMAS -->
+
+        <!-- MODAL HISTORIAL -->
+        <div id="modal-historial" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="titulo-historial" class="modal-title">¡Bienvenido/a!</h5>
+                        <button onclick="cerrarModalHistorial()" type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="cualquier-cosa-historial" class="modal-body">
+                        <p id="cuerpo-modal-historial">Felicidades por estar pendiente de su mejora</p>
+                        <input id="id-get" type="number" class="form-control" placeholder="Ingrese su identidad"><br>
+                        <span>Seleccione el tipo de paciente</span>
+                        <select class="form-control" name="tipo-paciente" id="tipo-paciente">
+                            <option selected value="2">Seleccione una opción</option>
+                            <option value="1">Paciente COVID</option>
+                            <option value="0">Paciente NO COVID</option>
+                        </select>
+                    </div>
+
+                    <div id="botones-modal-historial" class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="cerrarModalHistorial()" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="verificarPacienteTipo()">Ver historial</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN MODAL HISTORIAL -->
+
+        <!-- MODAL MULTI-USOS -->
+        <div id="modal-multi-uso" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Síntomas</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="comprobarArregloSintomas()">
+                  <h5 id="titulo-multi-uso" class="modal-title"></h5>
+                  <button onclick="cerrarModalMultiUso()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                    <div id="sintomas" class="checkboxx">
-
-                        <input type="checkbox" id="tos" name="tos" value="tos">
-                        <label for="tos">Tos</label><br>
-
-                        <input type="checkbox" id="congestion-nasal" name="congestion-nasal" value="congestion-nasal">
-                        <label for="congestion-nasal">Congestión nasal</label><br>
-
-                        <input type="checkbox" id="malestar-garganta" name="malestar-garganta" value="malestar-garganta">
-                        <label for="malestar-garganta">Malestar en la garganta</label><br>
-
-                        <input type="checkbox" id="dolor-corporal" name="dolor-corporal" value="dolor-corporal">
-                        <label for="dolor-corporal">Dolor corporal</label><br>
-
-                        <input type="checkbox" id="dolor-ojos" name="dolor-ojos" value="dolor-ojos">
-                        <label for="dolor-ojos">Dolor de ojos</label><br>
-
-                        <input type="checkbox" id="dolor-cabeza" name="dolor-cabeza" value="dolor-cabeza">
-                        <label for="dolor-cabeza">Dolor de cabeza</label><br>
-
-                        <input type="checkbox" id="vomito" name="vomito" value="vomito">
-                        <label for="vomito">Vómitos</label><br>
-
-                        <input type="checkbox" id="diarrea" name="diarrea" value="diarrea">
-                        <label for="diarrea">Diarrea</label><br>
-
-                        <input type="checkbox" id="decaimiento" name="decaimiento" value="decaimiento">
-                        <label for="decaimiento">Decaimiento</label><br>
-
-                        <input type="checkbox" id="fiebre" name="fiebre" value="fiebre">
-                        <label for="fiebre">Fiebre</label><br>
-
-                        <input type="checkbox" id="perdida-gusto-olfato" name="perdida-gusto-olfato" value="perdida-gusto-olfato">
-                        <label for="perdida-gusto-olfato">Pérdida de gusto y/o olfato</label><br>
-                        
-                        <input type="checkbox" id="opresion-pecho" name="opresion-pecho" value="opresion-pecho">
-                        <label for="opresion-pecho">Opresión en el pecho</label><br>
-                        
-                        <input type="checkbox" id="cansancio" name="cansancio" value="cansancio">
-                        <label for="cansancio">Cansancio</label><br>
-                        
-                        <input type="checkbox" id="sudoracion" name="sudoracion" value="sudoracion">
-                        <label for="sudoracion">Sudoración</label><br>
-                    </div>
+                <div id="cualquier-cosa" class="modal-body">
+                  <p id="cuerpo-modal"></p>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="reestablecerValorS()">Cerrar</button>
-                  <button type="button" class="btn btn-primary" onclick="ocultarModalSintomas(); guardarSintomas()">Guardar</button>
+                <div id="botones-modal-multi-uso" class="modal-footer">
+                  
                 </div>
               </div>
             </div>
           </div>
-        <!-- FIN MODAL SÍNTOMAS -->
+        <!-- FIN MODAL MULTI-USOS -->
 
 
 
-    </main>  
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -419,6 +539,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="../JS/home.js"></script>
 
 </body>
