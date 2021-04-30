@@ -6,9 +6,9 @@
         case 'GET':
             if(isset($_GET['id'])){
                 if($_GET['id'] == 1){
-                    echo json_encode(Referencia::getReferencia('referenciasC.json'));
+                    Referencia::getReferencia('referenciasC.json');
                 }else{
-                    echo json_encode(Referencia::getReferencia('referenciasNC.json'));
+                    Referencia::getReferencia('referenciasNC.json');
                 }
             }
             break;
