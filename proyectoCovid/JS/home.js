@@ -289,13 +289,11 @@ function regresarNoCovid(){
 }
 
 function regresarSecundarioNoCovid(){
-   ocultarSimularNoCovid();
-   mostrarNoCovid();
+   location.reload();
 }
 
 function regresarSecundarioCovid(){
-   ocultarSimularCovid();
-   mostrarCovid();
+   location.reload();
 }
 
 function ocultarCovid(){
@@ -573,6 +571,7 @@ function calcularSumaCovid(paciente, referencia){
     }
     // Falta sumarle el índice de masa corporal
     console.log(suma);
+    graficarCovidCircular(getProbabilidad(suma, valorMaximo));
 }
 
 function calcularSumaNoCovid(paciente, referencia){
@@ -746,6 +745,11 @@ function calcularSumaNoCovid(paciente, referencia){
     }
     // Falta sumarle el índice de masa corporal
     console.log(suma);
+    graficarNoCovidCircular(getProbabilidad(suma, valorMaximo));
+}
+
+function getProbabilidad(sum, max){
+    return Math.round(((100*sum)/max));
 }
 
 function mostrarModalMultiUso(titulo, cuerpo){
@@ -917,9 +921,11 @@ function graficarCovidBarras(tipo, datos){
   mostrarBarrasCovid(); 
 }
 
-function graficarCovidCircular(tipo, datos){
-   graficaCircularCovid(datos);
-   mostrarCircularCovid();
+function graficarCovidCircular(datos){
+    ocultarCovid();
+    document.getElementById('secundario-covid').style.display = 'block';
+    mostrarCircularCovid();
+    graficaCircularCovid(datos);
 }
 
 function graficarNoCovidBarras(tipo, datos){
@@ -927,9 +933,11 @@ function graficarNoCovidBarras(tipo, datos){
    mostrarBarrasNoCovid();
 }
 
-function graficarNoCovidCircular(tipo, datos){
-   graficaCircularNoCovid(datos);
-   mostrarCircularNoCovid();
+function graficarNoCovidCircular(datos){
+    ocultarNoCovid();
+    document.getElementById('secundario-noCovid').style.display = 'block';
+    mostrarCircularNoCovid();
+    graficaCircularNoCovid(datos);
 }
 
 function mostrarBarrasCovid(){
@@ -1010,29 +1018,24 @@ function graficaBarrasCovid(datos){
 
 function graficaCircularCovid(datos){
  
-   let titulo = 'Covid';
+   let titulo = 'PROBABILIDAD DE AGRAVARSE';
 
    let ctxCovidCircular = document.getElementById("chart-covid-circular");
    let dataCovidCircular = {
       datasets: [{
          label: titulo,
-         data: [datos["valorBase"], datos["probabilidadRecuperarse"],
-                datos["probabilidadMorir"], datos["valorEnfermedades"]],
+         data: [datos, 100 - datos],
          backgroundColor: [
              'rgba(9, 216, 243, 0.3)',
-             'rgba(112, 255, 45, 0.3)',
-             'rgba(243, 208, 9, 0.3)',
-             'rgba(204, 9, 243, 0.3)'
+             'rgba(112, 255, 45, 0.3)'
          ],
          borderColor: [
              'rgba(9, 216, 243, 1)',
-             'rgba(112, 255, 45, 1)',
-             'rgba(243, 208, 9, 1)',
-             'rgba(204, 9, 243, 1)'
+             'rgba(112, 255, 45, 1)'
          ],
          borderWidth: 1
       }],
-      labels: ['Base', 'Recuperarse', 'Morir', 'Enfermedades']
+      labels: [`Agravarse (${datos}%)`, `Recuperarse (${100 - datos}%)`]
    };
 
    let myPieChartCovid = new Chart(ctxCovidCircular, {
@@ -1085,29 +1088,24 @@ function graficaBarrasNoCovid(datos){
 
 function graficaCircularNoCovid(datos){
 
-   let titulo = 'No Covid';
+   let titulo = 'PROBABILIDAD DE CONTAGIARSE';
 
    let ctxNoCovidCircular = document.getElementById("chart-noCovid-circular");
    let dataNoCovidCircular = {
       datasets: [{
          label: titulo,
-         data: [datos["valorBase"], datos["probabilidadPositivo"],
-                datos["probabilidadNegativo"], datos["valorEnfermedades"]],
+         data: [datos, 100 - datos],
          backgroundColor: [
              'rgba(9, 216, 243, 0.3)',
-             'rgba(112, 255, 45, 0.3)',
-             'rgba(243, 208, 9, 0.3)',
-             'rgba(204, 9, 243, 0.3)'
+             'rgba(112, 255, 45, 0.3)'
          ],
          borderColor: [
              'rgba(9, 216, 243, 1)',
-             'rgba(112, 255, 45, 1)',
-             'rgba(243, 208, 9, 1)',
-             'rgba(204, 9, 243, 1)'
+             'rgba(112, 255, 45, 1)'
          ],
          borderWidth: 1
       }],
-      labels: ['Base', 'Positivo', 'Negativo', 'Enfermedades']
+      labels: [`Contagiarse (${datos}%)`, `No contagiarse (${100 - datos}%)`]
    };
 
    let myPieChartCovid = new Chart(ctxNoCovidCircular, {

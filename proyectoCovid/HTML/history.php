@@ -44,8 +44,12 @@ if ($_SESSION["token"] != $_COOKIE["token"])
     <div class="card-body row ml-0">
       <div class="col-sm-5 card border-info">
         <div class="circle">
-          <div class="image"></div>
-          <span id="name-span" class="name"></span>
+          <div id="circ"></div>
+          <!-- <div class="image"> -->
+            
+          <!-- </div> -->
+          <span id="name-span" class="name">
+          </span>
         </div>
       </div>
 
@@ -87,6 +91,47 @@ if ($_SESSION["token"] != $_COOKIE["token"])
       </div>
     </div>
   </div>
+
+  <!--Inicio canvas no covid-->
+  <div id="secundario-noCovid" class="card" style="display:none;">
+
+<div class="card-header">
+    <span class="title mt-2 mb-2"></span>
+    <div class="btn-group float-right" role="group">
+        <button id="regresar-secundario-noCovid" type="button" class="btn btn-warning mt-2 mb-2"
+            style="color:white;" onclick="regresarSecundarioNoCovid()">Regresar</button>
+    </div>
+</div>
+
+<div class="card-body col-sm-12 row">
+
+    <canvas id="chart-noCovid" width="400" height="400" style="display: none;"></canvas>
+    <canvas id="chart-noCovid-circular" width="770" height="385" style="display: none;"></canvas>
+</div>
+
+</div>
+<!--Fin canvas no covid-->
+
+
+<!--Inicio canvas covid-->
+<div id="secundario-covid" class="card" style="display:none;">
+
+<div class="card-header">
+    <span class="title mt-2 mb-2"></span>
+    <div class="btn-group float-right" role="group">
+        <button id="regresar-secundario-covid" type="button" class="btn btn-warning mt-2 mb-2"
+            style="color:white;" onclick="regresarSecundarioCovid()">Regresar</button>
+    </div>
+</div>
+
+<div class="card-body col-sm-12 row">
+
+    <canvas id="chart-covid" width="400" height="400" style="display: none;"></canvas>
+    <canvas id="chart-covid-circular" width="770" height="385" style="display: none;"></canvas>
+</div>
+
+</div>
+<!--Fin canvas covid-->
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
